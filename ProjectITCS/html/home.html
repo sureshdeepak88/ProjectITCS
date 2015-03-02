@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!--Stylesheets Plugin-->
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/element.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+    
+    
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    
+    
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="css/digital_clock.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+
+    <script src="js/vendor/Chart.js"></script>
+    <!--<script src="js/vendor/custom.modernizr.js"></script>-->
+    <script src="js/customChatScript.js"></script>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        #myChart {
+            background-color: #FAFAFA;
+        }
+    </style>
+</head>
+<body class="innerBody"  >
+    <div class="title-date-range">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="main-title">
+                    <h1 style="margin-top:30px; font-size:30px;">Dashboard</h1>
+                    <h5>Welcome</h5>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div id="reportrange">
+
+                    <div id="clock" class="light" style="float:right">
+                        <div class="display">
+                            <span id="CurrentDate"></span>
+                            <div class="digits"></div>
+                            <div class="ampm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="stats-counter-sec">
+                <div class="top-margin">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stats-counter">
+                                <h3>Pending Appointments</h3>
+                                <span id="pendAppt">0</span>
+                                <i class="fa fa-clock-o green"></i>
+                                <h6 id="clsAppt">Closed Appointments : 0</h6>
+                            </div><!-- Stats Counter -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-counter">
+                                <h3>Next Token Number</h3>
+                                <span id='nextToken'>1</span>
+                                <i class="fa fa-user red"></i>
+                                <h6 id='missedAppt'>Missed Appointments : 0</h6>
+                            </div><!-- Stats Counter -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-counter">
+                                <div class="ribbon-wrapper"><!-- <div class="ribbon-design blue">Today</div> --></div>
+                                <h3>Earnings</h3>
+                                <span id='todEarn'>0</span>
+                                <i class="fa fa-inr blue"></i>
+                                <h6 id='totEarn'>Total Earning : 0</h6>
+                            </div><!-- Stats Counter -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stats-counter">
+                                <h3>Doctors Available</h3>
+                                <span id='todDoc'>0</span>
+                                <i class="fa  fa-area-chart gray"></i>
+                                <h6 id='totDoc'>Total Doctors : 0</h6>
+                            </div><!-- Stats Counter -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top:30px">
+        <div class="col-md-6 col-lg-6">
+            <div class="panel panel-white no-radius" id="visits">
+                <div class="panel-heading border-light">
+                    <h4 class="panel-title">Monthly Visitors</h4>
+
+                </div>
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div ng-controller="VisitsCtrl" class="height-350 ng-scope">
+                            <canvas id="canvas"></canvas>
+                            <div class="margin-top-20">
+                                <div class="inline pull-left ng-isolate-scope"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="panel panel-white no-radius">
+                <div class="panel-heading border-light">
+                    <h4 class="panel-title">Weekly Visitors</h4>
+                </div>
+                <div class="panel-body">
+                    <canvas id="canvas1"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+
+
+    <script>
+		function CurrencyFormatted(amount)
+		{
+			var i = parseFloat(amount);
+			if(isNaN(i)) { i = 0.00; }
+			var minus = '';
+			if(i < 0) { minus = '-'; }
+			i = Math.abs(i);
+			i = parseInt((i + .005) * 100);
+			i = i / 100;
+			s = new String(i);
+			if(s.indexOf('.') < 0) { s += '.00'; }
+			if(s.indexOf('.') == (s.length - 2)) { s += '0'; }
+			s = minus + s;
+			return s;
+		}			
+        function fillPendingAppt(data) {
+            var out = JSON.parse(data);
+            if (out.rows.length)
+                document.getElementById('pendAppt').innerText = '' + out.rows[0].value;
+        }
+        function fillClosedAppt(data) {
+            var out = JSON.parse(data);
+            if (out.rows.length)
+                document.getElementById('clsAppt').innerText = 'Closed Appointments : ' + out.rows[0].value;
+        }
+        function fillNextToken(data) {
+            var out = JSON.parse(data);
+            if (out.rows.length)
+                document.getElementById('nextToken').innerText = '' + out.rows[0].value;
+        }
+		function fillMissedAppt(data) {
+            var out = JSON.parse(data);
+            if (out.rows.length)
+                document.getElementById('missedAppt').innerText = 'Missed Appointments : ' + out.rows[0].value;
+        }
+		function fillTodayEarnings(data) {
+			var out = JSON.parse(data);
+			if (out.rows.length)
+                document.getElementById('todEarn').innerText = '' + CurrencyFormatted(out.rows[0].value);
+		}
+		function fillTotalEarnings(data) {
+			var out = JSON.parse(data);
+			if (out.rows.length)
+                document.getElementById('totEarn').innerText = 'Total Earnings : ' + CurrencyFormatted(out.rows[0].value);
+		}
+		function fillTodayDoc(data) {
+			var out = JSON.parse(data);
+			if (out.rows.length)
+                document.getElementById('todDoc').innerText = '' + out.rows[0].value;
+		}
+		function fillTotalDoc(data) {
+			var out = JSON.parse(data);
+			if (out.rows.length)
+                document.getElementById('totDoc').innerText = 'Total Doctors : ' + out.rows[0].value;
+		}
+        function fillMonthlyChart(data) {
+            var out = JSON.parse(data);
+            var ctx = document.getElementById("canvas").getContext("2d");
+            var lineChartData = {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(45,203,115,.3)",
+                            strokeColor: "rgba(45,203,115,.9)",
+                            pointColor: "rgba(151,187,205,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(151,187,205,1)",
+                            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        }
+                ]
+
+            }
+            for (i = 0 ; i < out.rows.length ; i++) {
+                if (out.rows[i].key.toLowerCase() == 'jan')
+                    lineChartData.datasets[0].data[0] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'feb')
+                    lineChartData.datasets[0].data[1] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'mar')
+                    lineChartData.datasets[0].data[2] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'apr')
+                    lineChartData.datasets[0].data[3] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'may')
+                    lineChartData.datasets[0].data[4] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'jun')
+                    lineChartData.datasets[0].data[5] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'jul')
+                    lineChartData.datasets[0].data[6] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'aug')
+                    lineChartData.datasets[0].data[7] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'sep')
+                    lineChartData.datasets[0].data[8] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'oct')
+                    lineChartData.datasets[0].data[9] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'nov')
+                    lineChartData.datasets[0].data[10] = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'dec')
+                    lineChartData.datasets[0].data[11] = parseInt(out.rows[i].value);
+
+            }
+            window.myLine = new Chart(ctx).Line(lineChartData, {
+                responsive: true
+            });
+        }
+        function fillDailyChart(data) {
+            var out = JSON.parse(data);
+            var doughnutData = [
+                {
+                    value: 0,
+                    color: "#ff3b3f",
+                    highlight: "#f7464a",
+                    label: "Sunday"
+                },
+                {
+                    value: 0,
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "Monday"
+                },
+                {
+                    value: 0,
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "Tuesday"
+                },
+                {
+                    value: 0,
+                    color: "#ff6264",
+                    highlight: "#7c6991",
+                    label: "Wednesday"
+                },
+                {
+                    value: 0,
+                    color: "#40bbea",
+                    highlight: "#616774",
+                    label: "Thursday"
+                },
+                {
+                    value: 0,
+                    color: "#FDB45C",
+                    highlight: "#FFC870",
+                    label: "Friday"
+                },
+                {
+                    value: 0,
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: "Saturday"
+                }
+            ];
+            for (i = 0 ; i < out.rows.length ; i++) {
+                if (out.rows[i].key.toLowerCase() == 'sun')
+                    doughnutData[0].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'mon')
+                    doughnutData[1].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'tue')
+                    doughnutData[2].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'wed')
+                    doughnutData[3].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'thu')
+                    doughnutData[4].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'fri')
+                    doughnutData[5].value = parseInt(out.rows[i].value);
+                else if (out.rows[i].key.toLowerCase() == 'sat')
+                    doughnutData[6].value = parseInt(out.rows[i].value);
+            }
+            var ctx1 = document.getElementById("canvas1").getContext("2d");
+            window.myDoughnut = new Chart(ctx1).Doughnut(doughnutData, { responsive: true });
+        }
+        function getData(url, data) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {	// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    resp = JSON.parse(xmlhttp.responseText);
+                    if (resp.error) {
+                        alert("Internal error");
+                        return;
+                    }
+                    switch (parseInt(url)) {
+                        case 1003:
+                            fillPendingAppt(xmlhttp.responseText);
+                            break;
+                        case 1006:
+                            fillClosedAppt(xmlhttp.responseText);
+                            break;
+                        case 1007:
+                            fillNextToken(xmlhttp.responseText);
+                            break;
+                        case 1008:
+                            fillMissedAppt(xmlhttp.responseText);
+                            break;
+                        case 1009:
+                            fillDailyChart(xmlhttp.responseText);
+                            break;
+                        case 1011:
+                            fillMonthlyChart(xmlhttp.responseText);
+							break;
+						case 3001:
+							fillTotalEarnings(xmlhttp.responseText);
+                            break;
+						case 3002:
+							fillTodayEarnings(xmlhttp.responseText);
+							break;		
+						case 5002:
+							fillTotalDoc(xmlhttp.responseText);
+                            break;
+						case 5003:
+							fillTodayDoc(xmlhttp.responseText);
+							break;
+                    }
+                }
+            }
+            xmlhttp.open("GET", url + ".html", true);
+            xmlhttp.send();
+        }
+        var randomScalingFactor = function () { return Math.round(Math.random() * 50) };
+
+
+
+        window.onload = function () {
+            getData("1003");
+            getData("1006");
+            getData("1007");
+            getData("1008");
+            getData("1009");
+            getData("1011");
+			getData("3001");
+			getData("3002");
+			getData("5002");
+			getData("5003");
+        }
+    </script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>-->
+    <script src="js/vendor/digital_clock.js"></script>
+    <script src="js/commonScript.js"></script>
+</body>
+</html>

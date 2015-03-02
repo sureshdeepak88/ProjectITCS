@@ -1,0 +1,11 @@
+a. Edit patient							-  Can complete
+a. Display icons based on chosen open appointments and closed appointments				- Can Complete
+c. Automatic reloading of open appointments on addition of new appointments 			- Can Complete
+f. On clicking bill generation, Traverse to bill generation/casesheet/summary page and pre-fill available data - Can Complete
+g. Fill doctor information in the drop down based on the available doctors in the chosen appointment time - Can Complete
+1. Handle capture response function to display pdfs - Can Complete
+a. Fill service details based on the available services			- To Do
+b. If doc specific service, In the description provide a drop down list of all the doctors - To do
+a. To handle receipt printing and token printing - To do
+c. Request response to show Next token number details - To do
+a. To handle password change option for Admin - To do

@@ -1,0 +1,34 @@
+1. Earnings								 - Done
+2. Total earnings						 - Done
+3. Next token number logic				 - Done
+4. print token							 - Done . Print code alone pending
+5. Bill generation - Form pdf and return - Done
+6. Get pdf bill from bill number		 - Done
+7. Submit case sheet					 - Done
+8. Submit discharge summary				 - Done	
+9. Discharge summary number generation	 - Done
+10. case sheet number generation		 - Done
+11. Bill audit log
+12. Export audit log
+13. Receipt logic
+14. Reprint case sheet					 - Done
+15. Reprint discharge summary			 - Done
+16. limit closed appointment count
+
+Today's task
+-------------
+1. Next token logic											- Done
+2. Complete case sheet submission							- Done
+3. Complete discharge summary submission					- Done
+
+To be completed after deepak gives page
+-----------------------------------------
+3. Update earnings and doc details data in dashboard page
+4. Handle close function in page
+
+To be completed after Kiran comes
+-----------------------------------------
+1. Doctor addition/Edit
+2. Service Addition/Edit
+3. View Doctor Details
+4. View service Details 

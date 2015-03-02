@@ -1,0 +1,47 @@
+Setting up ITCS billing software
+--------------------------------
+1. Download and Install node js - http://nodejs.org/dist/v0.10.35/node.exe
+2. Download and Install couch db - http://apache.mirrors.tds.net/couchdb/binary/win/1.6.1/setup-couchdb-1.6.1_R16B02.exe
+
+	Once couch db is installed. Open browser and type localhost:5984 in address bar and press enter
+	
+	Successful installation should show 
+	
+	{"couchdb":"Welcome","uuid":"b9f6337d22be14888f532fa4c50a24b5","version":"1.6.1","vendor":{"version":"1.6.1","name":"The Apache Software Foundation"}}
+
+3. Take the zip file "ProjectITCS" from google drive and unzip it in some location in your machine.
+
+	You will have a parent directory "ProjectITCS" after extracting. Within that 'bin','docs','html','images'
+	directory will be present
+4. Run command prompt in your windows machine.
+5. Traverse to the "ProjectITCS"/bin directory.
+6. Ensure that internet connection is available before executing the bewlo commands commands. 
+"These commands are required only during installation and not during working"
+7. Execute the following commands.
+		a. npm install winreg 
+		b. npm install node-couchdb
+8. Open the "ITCSBill.reg" registry file shared in drive in notepad
+
+	Modify the Value of "InstallPath"  key with the path where the "ProjectITCS" directory is present
+
+	In case of 32 Bit machine modify the line [HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ITCSBILL] as
+	[HKEY_LOCAL_MACHINE\SOFTWARE\ITCSBILL]	
+9. Save the file 
+10. Double click the registry file. It will install the registry components.
+
+
+Running our server
+------------------
+a. Open command prompt
+b. Traverse to the "ProjectITCS"/bin directory
+c. Enter the command "node Server.js"
+d. You should see a line Server is listening.
+e. After this open a browser and you can access the HTTP server in "localhost:8080"
+f. Place any html files in the HTML directory of "ProjectITCS" and the same can be viewed in localhost:8080/<pagename>.html
+g. If the HTML pages are calling any images, place the images in Images directory of "ProjectITCS"
+
+
+
+	
+			
+		

@@ -1,0 +1,1049 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--Stylesheets Plugin-->
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+
+
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+	<link href="css/jquery.jscrollpane.css" rel="stylesheet" />
+	
+	<style type="text/css" id="page-css">
+			/* Styles specific to this particular page */
+			.scroll-pane
+			{
+				height: 230px;
+				overflow: auto;
+			}
+			.horizontal-only
+			{
+				height: auto;
+				max-height: 200px;
+			}
+		</style>
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+    <!--<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/src/js/bootstrap-datetimepicker.js"></script>-->
+    <script>
+        var docDetails = [];
+        var serviceDetails = {};
+		function hideStatusBox()
+		{
+			$('#docDivYes').addClass('active');
+			$('#docDivNo').removeClass('active');
+			document.getElementById ( 'DocStatusAdd' ).checked = true ;
+			$('.DoctorStatusCheck').addClass('InactiveRow');
+		}
+		function resetDocSpecific()
+		{
+			$('#costDivYes').addClass('active');
+			$('#costDivNo').removeClass('active');
+			document.getElementById ( 'CostStatusYes' ).checked = true ;
+			$('#FormAddServiceCost').attr('disabled', 'disabled');
+			$('.CostCheck').addClass('ActiveCost');
+		}
+		function addDoctor()
+		{
+			$.validate({
+				form:"#docForm",
+				onSuccess : function() {
+					var docInfo = {} ;
+					if ( document.getElementById('docIdVal').value != '' )
+					{
+						docInfo.id = document.getElementById('docIdVal').value ;
+						document.getElementById('docIdVal').value = '' ;
+						if ( document.getElementById('DocStatusAdd').checked == true )
+							docInfo.status = 'active' ;
+						else 	
+							docInfo.status = 'inactive' ;
+					}	
+					else
+					{
+						docInfo.status = 'active' ;
+					}	
+					docInfo.name = document.getElementById ( 'FormAddDoctorName').value ;
+					docInfo.speciality = document.getElementById ( 'FormAddDoctorSpeciality').value ;
+					docInfo.contact = document.getElementById ( 'FormAddDoctorContact').value ;
+					docInfo.availability = [] ;
+					var dayArr = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"] ;
+					for ( i = 0 ; i < 7 ; i++ )
+					{
+						var obj = {} ;
+						if ( document.getElementById(dayArr[i]+'StartVal').value != '' )
+						{
+							obj.day = i ;
+							obj.timeFrom = document.getElementById(dayArr[i]+'StartVal').value ;
+							if ( document.getElementById(dayArr[i]+'EndVal').value != '' )
+								obj.timeTo = document.getElementById(dayArr[i]+'EndVal').value ;
+							docInfo.availability.push (obj) ;	
+						}	
+					}
+					getData(5004,docInfo) ;	
+					$('.DoctorStatusCheck').addClass('InactiveRow');
+					return false; // Will stop the submission of the form
+				},
+				onError : function() {
+					return false; // Will stop the submission of the form
+				},
+			});
+		}
+		function addService()
+		{
+			$.validate({
+				form:"#serviceForm",
+				onSuccess : function() {
+					var serviceInfo = {} ;
+					if ( document.getElementById('serviceIdVal').value != '' )
+					{
+						serviceInfo.id = document.getElementById('serviceIdVal').value ;
+						document.getElementById('serviceIdVal').value = '' ;
+					}	
+					serviceInfo.desc = document.getElementById ( 'FormAddServiceName').value ;
+					serviceInfo.isDocSpecific = document.getElementById ( 'CostStatusYes').checked ;
+					if (document.getElementById ( 'CostStatusYes').checked==false)
+					{
+						serviceInfo.defaultCost = document.getElementById ( 'FormAddServiceCost').value ;
+					}	
+					getData(6004,serviceInfo) ;// Will stop the submission of the form
+					return false ;
+				},
+				onError : function() {
+					return false; // Will stop the submission of the form
+				},
+			});
+			return false ;
+		}
+        function setAvailability(obj)
+        {
+            index = parseInt(obj.getAttribute('index'));
+            document.getElementById('sundayStart').innerText = '--:--';
+            document.getElementById('sundayEnd').innerText = '--:--';
+            document.getElementById('mondayStart').innerText = '--:--';
+            document.getElementById('mondayEnd').innerText = '--:--';
+            document.getElementById('tuesdayStart').innerText = '--:--';
+            document.getElementById('tuesdayEnd').innerText = '--:--';
+            document.getElementById('wednesdayStart').innerText = '--:--';
+            document.getElementById('wednesdayEnd').innerText = '--:--';
+            document.getElementById('thursdayStart').innerText = '--:--';
+            document.getElementById('thursdayEnd').innerText = '--:--';
+            document.getElementById('fridayStart').innerText = '--:--';
+            document.getElementById('fridayEnd').innerText = '--:--';
+            document.getElementById('saturdayStart').innerText = '--:--';
+            document.getElementById('saturdayEnd').innerText = '--:--';
+            if ( docDetails[index].value.availability )
+            {
+                for ( i = 0 ; i < docDetails[index].value.availability.length ; i++ )
+                {
+                    if(typeof docDetails[index].value.availability[i].day != 'undefined' )
+                    {
+
+                        switch(docDetails[index].value.availability[i].day)
+                        {
+                            case 0:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('sundayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('sundayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('sundayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 1:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('mondayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('mondayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('mondayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 2:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('tuesdayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('tuesdayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('tuesdayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 3:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('wednesdayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('wednesdayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('wednesdayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 4:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('thursdayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('thursdayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('thursdayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 5:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('fridayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('fridayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('fridayEnd').innerText = '23:59';
+                                }
+                                break;
+                            case 6:
+                                if (docDetails[index].value.availability[i].timeFrom) {
+                                    document.getElementById('saturdayStart').innerText = docDetails[index].value.availability[i].timeFrom;
+                                    if (docDetails[index].value.availability[i].timeTo)
+                                        document.getElementById('saturdayEnd').innerText = docDetails[index].value.availability[i].timeTo;
+                                    else
+                                        document.getElementById('saturdayEnd').innerText = '23:59';
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            //document.getElementById("FormAddDoctorName").value = docDetails[index].value.name;
+        }
+		function editService(index)
+		{
+			if ( serviceDetails[index].value)
+			{
+				document.getElementById ('FormAddServiceName').value = serviceDetails[index].value.desc ;
+				document.getElementById ('serviceIdVal').value = serviceDetails[index].value._id ; 
+				if ( serviceDetails[index].value.isDocSpecific == true )
+				{
+					$('#costDivYes').addClass('active');
+					$('#costDivNo').removeClass('active');
+					document.getElementById ( 'CostStatusYes' ).checked = true ;
+					$('#FormAddServiceCost').attr('disabled', 'disabled');
+					$('.CostCheck').addClass('ActiveCost');
+				}	
+				else 
+				{
+					$('#costDivYes').removeClass('active');
+					$('#costDivNo').addClass('active');
+					$('#FormAddServiceCost').removeAttr("disabled");
+					$('.CostCheck').removeClass('ActiveCost');
+					document.getElementById ( 'CostStatusNo' ).checked = true ;
+					if ( serviceDetails[index].value.defaultCost )
+						document.getElementById ( 'FormAddServiceCost' ).value = serviceDetails[index].value.defaultCost ;
+				}	
+			}
+		}
+		function editDoc(index)
+		{
+			if ( docDetails[index].value )
+			{
+				$('.DoctorStatusCheck').removeClass('InactiveRow');
+				if ( docDetails[index].value.status == 'active' )
+				{
+					$('#docDivYes').addClass('active');
+					$('#docDivNo').removeClass('active');
+					document.getElementById ( 'DocStatusAdd' ).checked = true ;
+				}	
+				else 
+				{
+					$('#docDivYes').removeClass('active');
+					$('#docDivNo').addClass('active');
+					document.getElementById ( 'DocStatusRemove' ).checked = true ;
+				}	
+				document.getElementById ( 'FormAddDoctorName').value = docDetails[index].value.name ;
+				document.getElementById ( 'FormAddDoctorSpeciality').value = docDetails[index].value.speciality ;
+				document.getElementById ( 'FormAddDoctorContact').value = docDetails[index].value.contact ;
+				document.getElementById('docIdVal').value = docDetails[index].value._id ; 
+				for ( i = 0 ; i < docDetails[index].value.availability.length ; i++ )
+				{
+					if ( typeof docDetails[index].value.availability[i].day != 'undefined' )
+					{
+						switch (docDetails[index].value.availability[i].day)
+						{
+							case 0:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('sundayStartVal').value = docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('sundayEndVal').value = docDetails[index].value.availability[i].timeTo ;
+								break ;
+							case 1:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('mondayStartVal').value = docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('mondayEndVal').value = docDetails[index].value.availability[i].timeTo ;
+								break ;
+							case 2:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('tuesdayStartVal').value =  docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('tuesdayEndVal').value =  docDetails[index].value.availability[i].timeTo ;
+								break ;
+							case 3:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('wednesdayStartVal').value =  docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('wednesdayEndVal').value =  docDetails[index].value.availability[i].timeTo ;
+								break ;
+							case 4:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('thursdayStartVal').value =  docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('thursdayEndVal').value =  docDetails[index].value.availability[i].timeTo ;
+								break ;
+							case 5:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('fridayStartVal').value =  docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('fridayEndVal').value =  docDetails[index].value.availability[i].timeTo ;
+								break ; 
+							case 6:
+								if (docDetails[index].value.availability[i].timeFrom)
+									document.getElementById('saturdayStartVal').value =  docDetails[index].value.availability[i].timeFrom ;
+								if (docDetails[index].value.availability[i].timeTo)
+									document.getElementById('saturdayEndVal').value = docDetails[index].value.availability[i].timeTo ;
+								break ;
+						}
+					}	
+				}
+			}
+		}
+        function fillDocTable(doc) {
+            var table = document.getElementById('docTableX');
+			table.innerHTML = '' ;
+            for (i = 0 ; i < doc.length ; i++) {
+                var outerDiv = document.createElement('div');
+                if ( doc[i].value.status == 'active')
+                    outerDiv.setAttribute('class', 'row enableDoc');
+                else
+                    outerDiv.setAttribute('class', 'row disableDoc');
+                var innerData = '<div class="col-md-3 col-lg-3 CheckCol"><button index="' + i + '" class="noButtons" type="button"><i class="fa fa-pencil-square" onclick="editDoc('+i+')"></i></button></div><div id=name' + i + '" class="col-md-3 col-lg-3">' + doc[i].value.name + '</div><div id="speciality' + i + '" class="col-md-3 col-lg-3">' + doc[i].value.speciality + '</div><div id="contact' + i + ' "class="col-md-3 col-lg-3">' + doc[i].value.contact + '</div><div index="' + i + '" class="col-md-3 col-lg-3 ViewTimeCol" onclick="setAvailability(this)" ><span class="btn_View" data-toggle="modal" data-target="#ViewAvail">View</span></div>';
+                outerDiv.innerHTML = innerData;
+                table.appendChild(outerDiv);
+            }
+        }
+
+        function fillServiceTable(doc) {
+            var desc ='';
+            var defaultCost ='';
+            var table = document.getElementById('SrvTableX');
+			table.innerHTML = '' ;
+            for (i = 0 ; i < doc.length ; i++) {
+                var outerDiv = document.createElement('div');
+                //if (!doc[i].value.isDocSpecific==true)
+				if (i%2==0)
+                    outerDiv.setAttribute('class', 'row');
+                else
+                    outerDiv.setAttribute('class', 'row enableDoc');
+                desc = doc[i].value.desc;
+                defaultCost = doc[i].value.defaultCost;
+                if (!defaultCost)
+                    defaultCost = '-NA-';
+                var innerData = '<div class="col-md-6 col-lg-6 CheckCol"><button index="' + i + '" class="noButtons" type="button"><i class="fa fa-pencil" onclick="editService('+i+')"></i></button></div><div id="srvDesc' + i + '" class="col-md-6 col-lg-6">' + doc[i].value.desc + '</div><div id="dftCost' + i + '" class="col-md-6 col-lg-6 CostCol">' + defaultCost + '</div>';
+                outerDiv.innerHTML = innerData;
+                table.appendChild(outerDiv);
+            }
+        }
+		function closeApplication ()
+		{
+			r = confirm("Are you sure you want to close the application ?") ;
+			if ( r == true ) 
+				getData (9001) ;
+			return false ;	
+		}
+        function getData(url, data) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {	// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					resp = JSON.parse(xmlhttp.responseText);
+                    if (resp.error) {
+                        alert("Internal error");
+                        return;
+                    }
+                    switch (parseInt(url)) {
+                        case 5001://Get doctor info
+                            docDetails = resp.rows;
+                            fillDocTable(docDetails);
+                            break;
+                        case 6001://Get service info
+                            serviceDetails = resp.rows;
+                            fillServiceTable(serviceDetails);
+                            break;
+						case 5004:
+							if (resp.response && resp.response == 'Success')
+								parent.myAlert ( "Doctor information updated successfully" ) ;
+							else
+								parent.myAlert ( "Error updating doctor information" ) ;	
+							document.getElementById('docForm').reset() ;	
+							getData(5001);
+							break ;	
+						case 6004:
+							if (resp.response && resp.response == 'Success')
+								parent.myAlert ( "Service information updated successfully" ) ;
+							else
+								parent.myAlert ( "Error updating service information" ) ;	
+							document.getElementById('serviceForm').reset() ;	
+							getData(6001);
+							break ;	
+						case 9001:
+                            if (resp.response == 'ok') {
+							    window.open('','_self').close();
+							}
+                            break;			
+                    }
+                }
+            }
+			if ( data )
+				xmlhttp.open("GET", url + ".html?jsonData="+escape(JSON.stringify(data)), true);
+			else
+				xmlhttp.open("GET", url + ".html", true);
+            xmlhttp.send();
+        }
+        getData(5001);
+        getData(6001);
+    </script>
+
+</head>
+<body class="innerBody">
+	<header class="header" style="left:0px;">
+        <div class="PositionedHeader">
+            <div class="Logo">
+                <img src="../images/logo.png" /><span> Sri Raghavendra Hospital</span>
+            </div>
+            <div class="icon_right">
+                <ul>
+                    <li><a style="display:block;" href="javascript:void(0)" onclick="parent.closeApplication()"><i class="fa fa-close"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+	</br>
+    <div class="row">
+        <div class=" col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-sm-12 col-md-7 col-lg-7 CollapsecolMargin">
+                    <div class="" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-white no-radius">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Doctors List</h4>
+                                <div class="RightIcons">
+                                </div>
+                            </div>
+                            <div class="panel-wrapper collapse in " id="ViewDoctor">
+                                <div id='ViewDoctorContainer' class="panel-body" style="height:335px;overflow:auto;">
+                                    <div class="panel-body">
+                                        <div class="InfoContainer">
+                                            <div  class="TableView DoctorView">
+                                                <div class="TableViewHeader">
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-lg-3 CheckCol">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            Name
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            Speaciality
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            Contact
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 ViewTimeCol">
+                                                            Availability
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="docTableX" class="TableViewData" style="height:230px;overflow:auto">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal fade" id="ViewAvail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="row ">
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Monday  </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="mondayStart" class="StartTime">--:--</label> - <label id="mondayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Tuesday  </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="tuesdayStart" class="StartTime" >--:--</label> - <label id="tuesdayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Wednesday  </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="wednesdayStart" class="StartTime">--:--</label> - <label id="wednesdayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Thursday </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="thursdayStart" class="StartTime">--:--</label> - <label id="thursdayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Friday </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="fridayStart" class="StartTime">--:--</label> - <label id="fridayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="WeekDay">Saturday </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="saturdayStart" class="StartTime">--:--</label> - <label id ="saturdayEnd" class="EndTime">--:--</label>
+</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 center_Column">
+                                                <div class="WeekDay">Sunday  </div>
+                                                <div class="WeekTime">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label id="sundayStart" class="StartTime">--:--</label> - <label id="sundayEnd" class="EndTime">--:--</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-white no-radius">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Services List</h4>
+                                <div class="RightIcons">
+                                </div>
+                            </div>
+                            <div class="panel-wrapper collapse in " id="ViewService">
+                                <div id='ViewServiceContainer' class="panel-body" style="height:335px;overflow:auto;">
+                                    <div class="panel-body">
+                                        <div class="InfoContainer">
+                                            <div class="TableView ServiceView">
+                                                <div class="TableViewHeader">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-lg-6 CheckCol">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-6">
+                                                            Name
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-6 CostCol">
+                                                            Cost
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="SrvTableX" class="TableViewData" style="height:230px;overflow:auto;">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 col-lg-5">
+                    <div class="panel panel-white no-radius">
+                        <form id='docForm' method="post" onsubmit="return addDoctor()" action="#">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Add Doctors</h4>
+                                <div class="RightIcons">
+                                    <button class="noButtons" value='submit' type="submit"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-floppy-o fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Save"></i></span></button>
+                                    <button class="noButtons" value='reset' type="reset"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i onclick='hideStatusBox()' class="fa fa-refresh fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Reset"></i></span></button>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper collapse in" id="AddDoctor">
+                                <div class="panel-body">
+                                    <div class="InfoContainer">
+                                        <div class="InfoHeader" data-toggle="collapse" data-target="#CollapseAddDoctor" aria-expanded="false" aria-controls="CollapseAddDoctor">
+                                            <h5>
+                                                <span class="fa-stack fa-lg">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-info-circle fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span class="InfoHeaderLabel">Please provide details to Add Doctor</span>
+                                                <span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span>
+                                                <span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>
+                                            </h5>
+                                        </div>
+                                        <div id="CollapseAddDoctor" class="collapse in CollapseContainer">
+											<input type='hidden' id="docIdVal" value=''>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-user-md"></i>
+                                                        <div class="infoLabel">Name</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField ">
+                                                            <input type="text" autocomplete="off" name="AddDoctorName" class="form-control" id="FormAddDoctorName" placeholder="Enter Doctor Name" data-validation="required" data-validation-error-msg=" " />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-shield"></i>
+                                                        <div class="infoLabel">Speciality</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField ">
+                                                            <input type="text" autocomplete="off" name="AddDoctorSpeciality" class="form-control" id="FormAddDoctorSpeciality" placeholder="Enter Doctor's Speciality" data-validation="required" data-validation-error-msg=" " />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-phone"></i>
+                                                        <div class="infoLabel">Contact Number</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField ">
+                                                            <input type="text" autocomplete="off" name="AddDoctorContact" class="form-control" id="FormAddDoctorContact" placeholder="Enter Contact Number" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-hand-o-up"></i>
+                                                        <div class="infoLabel">Availbility</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField borderLeft">
+                                                            <span class="btn_View" data-toggle="modal" data-target="#ChooseAvail">Choose Availbility</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row DoctorStatusCheck InactiveRow">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-flag"></i>
+                                                        <div class="infoLabel">Status</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField borderLeft">
+                                                            <div id="DoctorStatus" class="btn-group" data-toggle="buttons">
+                                                                <label id='docDivYes' class="btn btn-default active">
+                                                                    <input type="radio" name="DoctorStatus" value="Yes" id="DocStatusAdd" checked>
+                                                                    Add
+                                                                </label>
+                                                                <label id='docDivNo' class="btn btn-default CheckStatusNo">
+                                                                    <input type="radio" name="DoctorStatus" value="No" id="DocStatusRemove">
+                                                                    Remove
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="itcsdata" value="" id="itcsdata">
+
+                            <div class="modal fade" id="ChooseAvail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row ">
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Monday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="mondayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="mondayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Tuesday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="tuesdayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="tuesdayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Wednesday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="wednesdayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="wednesdayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Thursday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="thursdayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="thursdayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Friday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="fridayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="fridayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="WeekDay">Saturday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="saturdayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="saturdayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 center_Column">
+                                                    <div class="WeekDay">Sunday <span class="Reset fa fa-refresh"></span></div>
+                                                    <div class="WeekTime">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="sundayStartVal" type="text" class="form-control" autocomplete="off" placeholder="Start Date">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="input-group date Timepicker">
+                                                                    <input id="sundayEndVal" type="text" class="form-control" autocomplete="off" placeholder="End Date">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel panel-white no-radius">
+                        <form id="serviceForm" onsubmit="return addService()" method="post" action="">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Add Services</h4>
+                                <div class="RightIcons">
+                                    <button class="noButtons" type="submit"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-floppy-o fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Save"></i></span></button>
+                                    <button class="noButtons" type="reset"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-refresh fa-stack-1x fa-inverse" onclick="resetDocSpecific()" data-toggle="tooltip" data-placement="top" title="Reset"></i></span></button>
+                                </div>
+                            </div>
+
+                            <div class="panel-wrapper collapse in" id="AddService">
+                                <div class="panel-body" style="height:335px">
+                                    <div class="InfoContainer">
+                                        <div class="InfoHeader" data-toggle="collapse" data-target="#CollapseAddService" aria-expanded="false" aria-controls="CollapseAddService">
+                                            <h5>
+                                                <span class="fa-stack fa-lg">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-info-circle fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span class="InfoHeaderLabel">Please provide details to Add Service</span>
+                                                <span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span>
+                                                <span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>
+                                            </h5>
+                                        </div>
+                                        <div id="CollapseAddService" class="collapse in CollapseContainer">
+											<input type='hidden' id="serviceIdVal" value=''>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-user-md"></i>
+                                                        <div class="infoLabel">Service Name</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField ">
+                                                            <input type="text" autocomplete="off" name="AddServiceName" class="form-control" id="FormAddServiceName" placeholder="Enter Service Name" data-validation="required" data-validation-error-msg=" " />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-check-square-o"></i>
+                                                        <div class="infoLabel">Doctor Specific</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField borderLeft ">
+                                                            <div id="ServiceStatus" class="btn-group" data-toggle="buttons">
+                                                                <label id='costDivYes' class="btn btn-default active">
+                                                                    <input type="radio" name="CostStatus" value="Yes" id="CostStatusYes" checked>
+                                                                    Yes
+                                                                </label>
+                                                                <label id='costDivNo' class="btn btn-default CheckStatusNo">
+                                                                    <input type="radio" name="CostStatus" value="No" id="CostStatusNo">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="infoRow DatePicker_Row CostCheck ActiveCost">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-lg-4">
+                                                        <i class="fa fa-inr"></i>
+                                                        <div class="infoLabel">Cost</div>
+                                                    </div>
+                                                    <div class="col-md-8 col-lg-8">
+                                                        <div class="infoTextbox FormField ">
+                                                            <input type="text" autocomplete="off" name="AddServiceCost" class="form-control"  id="FormAddServiceCost" placeholder="Enter Service Cost" disabled='disabled' />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="itcsdata" value="" id="itcsdata">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span><img class="info_icon" src="../images/info_icon.png" /> </span> </h4>
+                </div>
+                <div id='alertText' class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/jquery.loadJSON.js"></script>
+    <script src="js/vendor/jquery.form-validator.min.js"></script>
+	<script src="js/vendor/jquery.jscrollpane.js"></script>
+	<script src="js/vendor/jquery.jscrollpane.min.js"></script>
+	<script src="js/vendor/jquery.mousewheel.js"></script>
+    <script src="js/commonScript.js"></script>
+    <script>
+        $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+        $('.Timepicker').datetimepicker({
+            format: 'LT',
+        });
+		$(function()
+		{
+			$('.scroll-pane').jScrollPane();
+		});
+		function myAlert(errMsg) {
+            $('#alertText').text(errMsg);
+            $('#myModal').modal();
+        }
+    </script>
+</body>
+</html>

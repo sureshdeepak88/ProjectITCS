@@ -1,0 +1,85 @@
+next token #
+missed appts count
+closed appts
+open appts for today
+
+
+MY BACK UP
+---------
+
+{
+   "patientName": {
+       "map": "function(doc) {\n  emit(doc.name, doc);\n}\n"
+   },
+   "patientNo": {
+       "map": "function(doc) {\n  emit(doc.contactNo, doc) ;\n}\n"
+   },
+   "patientId": {
+       "map": "function(doc) {\n  emit(doc._id, 1) ;\n}\n",
+       "reduce": "function ( keys,values) {\n return sum(values);\n}\n"
+   },
+   "patientById": {
+       "map": "function(doc) {\n  emit(doc._id, doc) ;\n}"
+   },
+   "opclappt": {
+       "map": "function(doc) {\nvar d = new Date();\nfor ( itr in doc.appointment ) {\napptDate = new Date(doc.appointment[itr].date);\n if ( (apptDate.getMonth()+1) == (d.getMonth()+1) && \n \tapptDate.getFullYear() == d.getFullYear() &&\n\tapptDate.getDate() == d.getDate())\n{ emit (doc.appointment[itr].status,1);\n}\n}\n}",
+       "reduce": "function (keys,values)\n{\n\treturn(keys,sum(values));\n}"
+   },
+   "lstclsappt": {
+       "map": "function(doc) {\n\n\tfor ( itr in doc.appointment) {\n\t\tif ( doc.appointment[itr].status == \"closed\") {\n\t\t\temit(doc._id,doc.appointment[itr].nbr);\n\t\t}\n\t}\n}",
+       "reduce": "function (keys, values) {\n\treturn Math.max.apply({}, values);\n}"
+   },
+   "lst7appt": {
+       "map": "function(doc) {\n\tvar TODAY = new Date();\n\tvar itr1 = 7;\n\twhile (itr1 > 0)\n\t{\n\t\tTODAY.setDate(TODAY.getDate()-1);\n\t\tfor ( itr in doc.appointment) {\n\t\t\tvar apptDate = new Date(doc.appointment[itr].date);\n\t\t\tif ( \tapptDate.getFullYear() == TODAY.getFullYear() &&\n\t\t\t\t(apptDate.getMonth()+1) == (TODAY.getMonth()+1) &&\n\t\t\t\tapptDate.getDate() == TODAY.getDate() ) {\n\t\t\t\t\temit(null,1);\n\t\t\t}\n\t\t}\n\titr1 = itr1-1;\n\t}\n}",
+       "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+   },
+   "totappt": {
+       "map": "function(doc) {\nTODAY = new Date();\n\n\tfor ( itr in doc.appointment ) {\n\n\tapptDate = new Date(doc.appointment[itr].date);\n\n\t\tif ( \tapptDate.getFullYear() == TODAY.getFullYear() &&\n\t\t\t(apptDate.getMonth()+1) == (TODAY.getMonth()+1) &&\n\t\t\tapptDate.getDate() == TODAY.getDate() ) {\n\n\t\t  emit(null,1);\n\n\t\t}\n\t}\n}",
+       "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+   },
+   "apptopen": {
+       "map": "function(doc) {\nTODAY = new Date();\n\n\tfor ( itr in doc.appointment ) {\n\n\tapptDate = new Date(doc.appointment[itr].date);\n\n\t\tif ( \tapptDate.getFullYear() == TODAY.getFullYear() &&\n\t\t\t(apptDate.getMonth()+1) == (TODAY.getMonth()+1) &&\n\t\t\tapptDate.getDate() == TODAY.getDate() &&\n\t\t\tdoc.appointment[itr].status == \"open\" ) {\n\n\t\t  emit(doc._id, doc.appointment[itr].nbr);\n\n\t\t}\n\t}\n}"
+   }
+}
+
+ROCKY SUGGESTION
+----------------
+
+{
+
+       "patientName": {
+           "map": "function(doc){\nemit(doc.name.toLowerCase(),{id:doc._id,nbr:doc.nbr,name:doc.name,gender:doc.gender,occupation:doc.occupation,maritalStatus:doc.maritalStatus,dateOfBirth:doc.dateOfBirth,primaryContact:doc.primaryContact,primaryContactNbr:doc.primaryContactNbr,addressLine1:doc.addressLine1,addressLine2:doc.addressLine2,city:doc.city,pin:doc.pin,contactNo:doc.contactNo,admittedContact:doc.admittedContact,admittedContactRelation:doc.admittedContactRelation,createTs:doc.createTs});\n}"
+       },
+       "patientNo": {
+           "map": "function(doc){\nemit(doc.contactNo.toLowerCase(),{id:doc._id,nbr:doc.nbr,name:doc.name,gender:doc.gender,occupation:doc.occupation,maritalStatus:doc.maritalStatus,dateOfBirth:doc.dateOfBirth,primaryContact:doc.primaryContact,primaryContactNbr:doc.primaryContactNbr,addressLine1:doc.addressLine1,addressLine2:doc.addressLine2,city:doc.city,pin:doc.pin,contactNo:doc.contactNo,admittedContact:doc.admittedContact,admittedContactRelation:doc.admittedContactRelation,createTs:doc.createTs});\n}"
+       },
+       "patientId": {
+           "map": "function(doc) {emit(doc._id, 1);}",
+           "reduce": "function (keys,values){ return sum (values);}"
+       },
+
+       "patientById": {
+           "map": "function(doc) {emit(doc._id, doc);}"
+       },
+       "apptopen": {
+           "map": "function(doc) { TODAY = new Date();\n\n\tfor ( itr in doc.appointment ) {\n\n\tapptDate = new Date(doc.appointment[itr].date);\n\n\t\tif ( \tapptDate.getFullYear() == TODAY.getFullYear() &&\n\t\t\t(apptDate.getMonth()+1) == (TODAY.getMonth()+1) &&\n\t\t\tapptDate.getDate() == TODAY.getDate() &&\n\t\t\tdoc.appointment[itr].status == \"open\" ) {\n\n\t\t  emit(doc._id, doc.appointment[itr]);\n\n\t\t}\n\t}\n}"
+       },
+   "opclappt": {
+       "map": "function(doc) {\nvar d = new Date();\nfor ( itr in doc.appointment ) {\napptDate = new Date(doc.appointment[itr].date);\n if ( (apptDate.getMonth()+1) == (d.getMonth()+1) && \n \tapptDate.getFullYear() == d.getFullYear() &&\n\tapptDate.getDate() == d.getDate())\n{ emit (doc.appointment[itr].status,1);\n}\n}\n}",
+       "reduce": "function (keys,values)\n{\n\treturn(keys,sum(values));\n}"
+   },
+   "lstclsappt": {
+       "map": "function(doc) {\n\n\tfor ( itr in doc.appointment) {\n\t\tif ( doc.appointment[itr].status == \"closed\") {\n\t\t\temit(doc._id,doc.appointment[itr].nbr);\n\t\t}\n\t}\n}",
+       "reduce": "function (keys, values) {\n\treturn Math.max.apply({}, values);\n}"
+   },
+
+       "totappt": {
+           "map": "function(doc) {\n\tvar TODAY = new Date();\n\tfor ( itr in doc.appointment) {\n\t\tvar apptDate = new Date(doc.appointment[itr].date);\n\t\tif ( \tapptDate.getFullYear() == TODAY.getFullYear() &&\n\t\t\t(apptDate.getMonth()+1) == (TODAY.getMonth()+1) &&\n\t\t\tapptDate.getDate() == TODAY.getDate() ) {\n\t\t\t\temit(null,1);\n\t\t}\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "lst7appt": {
+           "map": "function(doc) {\n\tvar d = new Date() ;\n\tvar curDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' 00:00:00' ;\n\tvar d1 = new Date(curDate);\n\tvar curUTC = d1.getTime() ;\n        var weekBeforeUTC = curUTC - (7*24*60*60*1000) ;\t\n\tvar day = [\"Sun\",\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\"] ;\n\tfor ( itr in doc.appointment )\n\t{\n\t\ttry {\n\t\t\tapptDate = new Date (doc.appointment[itr].date) ;// Get current days UTC time\n\t\t\tcurrTime = apptDate.getTime();\n\t\t\tif ( currTime>= weekBeforeUTC && currTime<=curUTC )\n\t\t\t\temit(day[apptDate.getDay()],1);\n\t\t}\n\t\tcatch(e){}\t\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       }
+
+}

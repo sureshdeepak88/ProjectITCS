@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--Stylesheets Plugin-->
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+
+
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="innerBody">
+
+    <form onsubmit="return submitData()" method="post" id='CasesheetForm'>
+        <div class="Casesheet">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-user fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">Patient Name</span>
+                            <span class="LabelTextTile"><span name="PatientName" id="FormPatientName"></span></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-birthday-cake fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">Age</span>
+                            <span class="LabelTextTile"><span name="" id=""></span></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-venus-mars fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">Gender</span>
+                            <span class="LabelTextTile"><span name="" id=""></span></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-map-marker fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">City</span>
+                            <span class="LabelTextTile"><span name="" id=""></span></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-key fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">IP Number</span>
+                            <span class="LabelTextTile"><span name="" id=""></span></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="TileDisplay">
+                        <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-clock-o fa-stack-1x fa-inverse"></i></span>
+                        <span class="TileGroupBox">
+                            <span class="TileLabel">Admission Time</span>
+                            <span class="LabelTextTile"><span name="" id=""></span></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-heading border-light">
+                            <h4 class="panel-title">Case Sheet</h4>
+                        </div>
+                        <div class="panel-wrapper collapse in">
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Case Seen by Doctor(s)  </label>
+                                        <input type="text" id="" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Diagnosis</label>
+                                        <input type="text" id="" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div style="text-align:center">
+                    <input class="btn btn-success button_formsubmit" type='submit' value='Submit'>&nbsp;&nbsp;&nbsp;
+                    <input class="btn btn-default button_formreset" type='reset' value='Reset'>
+                    <input type='hidden' id='field24' name='itcsdata' />
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+        </form>
+        <script src="js/jquery.loadJSON.js"></script>
+        <script src="js/vendor/jquery.form-validator.min.js"></script>
+        <script src="js/commonScript.js"></script>
+    <script>
+        function submitData() {
+            $.validate({
+                form: "#CasesheetForm",
+                onSuccess: function () { }
+            });
+        }
+    </script>
+    <style>
+        .fa-2x {
+            font-size: 22px;
+        }
+    </style>
+</body>
+</html>

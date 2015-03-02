@@ -1,0 +1,147 @@
+bill
+-----
+
+{
+   "_id": "_design/bill",
+   "_rev": "8-942bd5851bc0c5b2e2e6264b485d81ad",
+   "language": "javascript",
+   "views": {
+       "billId": {
+           "map": "function(doc) {emit(null,doc._id);}",
+           "reduce": "function (keys,values){ return Math.max.apply({},values);}"
+       },
+       "totEarnings": {
+           "map": "function(doc) {\n  emit(null, doc.earnings);\n}",
+           "reduce": "function (keys,values)\n{\n\treturn sum(values);\n}"
+       },
+       "todEarnings": {
+           "map": "function(doc) {\n \temit(doc.dischargeDate, doc.earnings);\n}",
+           "reduce": "function (keys,values)\n{\n\treturn sum(values) ;\n}"
+       }
+   }
+}
+
+casesheet
+---------
+{
+   "_id": "_design/casesheet",
+   "_rev": "1-41b9351c084be63bf1643143389ec31e",
+   "language": "javascript",
+   "views": {
+       "casesheetId": {
+           "map": "function(doc) {emit(null, doc._id);}",
+           "reduce": "function(keys,values){return Math.max.apply({},values) ;}"
+       }
+   }
+}
+
+doctor
+------
+{
+   "_id": "_design/doctor",
+   "_rev": "9-2cee456e84b71641dc9ca26f70d37b30",
+   "language": "javascript",
+   "views": {
+       "getDocDetails": {
+           "map": "function(doc) {\n  emit(doc.name, doc);\n}"
+       },
+       "getDocCount": {
+           "map": "function(doc) {\n  emit(null, 1);\n}",
+           "reduce": "function(keys,values)\n{\n\treturn sum(values) ;\n}"
+       },
+       "getCurDocCount": {
+           "map": "function(doc) {\n  if (doc.availability)\n  {\n \n  \tfor ( i in doc.availability )\n  \t{\n\t\temit ( doc.availability[i].day , 1 ) ;\n\t}\n  }\t\t\n}",
+           "reduce": "function(keys,values)\n{\n\treturn sum(values) ;\n}"
+       },
+       "doctorId": {
+           "map": "function(doc) {\n  emit(null, doc._id);\n}",
+           "reduce": "function(keys,values)\n{\n\treturn Math.max.apply({},values) ;\n}"
+       }
+   }
+}
+
+
+patient
+-------
+{
+   "_id": "_design/patient",
+   "_rev": "44-98ed01121fb807bba792effa39995668",
+   "views": {
+       "patientName": {
+           "map": "function(doc){\nemit(doc.name.toLowerCase(),{id:doc._id,nbr:doc.nbr,name:doc.name,gender:doc.gender,occupation:doc.occupation,maritalStatus:doc.maritalStatus,dateOfBirth:doc.dateOfBirth,primaryContact:doc.primaryContact,primaryContactNbr:doc.primaryContactNbr,addressLine1:doc.addressLine1,addressLine2:doc.addressLine2,city:doc.city,pin:doc.pin,contactNo:doc.contactNo,admittedContact:doc.admittedContact,admittedContactRelation:doc.admittedContactRelation,createTs:doc.createTs});\n}"
+       },
+       "patientNo": {
+           "map": "function(doc){\nemit(doc.contactNo.toLowerCase(),{id:doc._id,nbr:doc.nbr,name:doc.name,gender:doc.gender,occupation:doc.occupation,maritalStatus:doc.maritalStatus,dateOfBirth:doc.dateOfBirth,primaryContact:doc.primaryContact,primaryContactNbr:doc.primaryContactNbr,addressLine1:doc.addressLine1,addressLine2:doc.addressLine2,city:doc.city,pin:doc.pin,contactNo:doc.contactNo,admittedContact:doc.admittedContact,admittedContactRelation:doc.admittedContactRelation,createTs:doc.createTs});\n}"
+       },
+       "patientId": {
+           "map": "function(doc) {emit(null,doc._id);}",
+           "reduce": "function (keys,values){ return Math.max.apply({},values);}"
+       },
+       "patientById": {
+           "map": "function(doc) {emit(doc._id, doc);}"
+       },
+       "apptopen": {
+           "map": "function(doc) { \n\tfor ( itr in doc.appointment ) {\n\t\tif ( doc.appointment[itr].status == \"open\" ) {\n\n\t\t  emit([doc._id,doc.appointment[itr].date], doc.appointment[itr]);\n\n\t\t}\n\t}\n}"
+       },
+       "totappt": {
+           "map": "function(doc) {\n\tfor ( itr in doc.appointment) {\n\t\temit(doc.appointment[itr].date,1);\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "lst7appt": {
+           "map": "function(doc) {\n\tvar d = new Date() ;\n\tvar curDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' 23:59:59' ;\n\tvar d1 = new Date(curDate);\n\tvar curUTC = d1.getTime() ;\n        var weekBeforeUTC = curUTC - (7*24*60*60*1000) ;\t\n\tvar day = [\"Sun\",\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\"] ;\n\tfor ( itr in doc.appointment )\n\t{\n\t\tif ( doc.appointment[itr].status == 'closed' )\t\n\t\t{\n\t\t\ttry {\n\t\t\t\tapptDate = new Date (doc.appointment[itr].date) ;// Get current days UTC time\n\t\t\t\tcurrTime = apptDate.getTime();\n\t\t\t\tif ( currTime>= weekBeforeUTC && currTime<=curUTC )\n\t\t\t\t\temit(day[apptDate.getDay()],1);\n\t\t\t}\n\t\t\tcatch(e){}\t\n\t\t}\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "apptopenout": {
+           "map": "function(doc) \n{ \n\tfor ( itr in doc.appointment ) \n\t{\n\t\tif ( doc.appointment[itr].status == \"open\" && doc.appointment[itr].type == \"OUT\" ) \n\t\t{\n\t\t\temit(doc.appointment[itr].date, 1);\n\t\t}\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "apptclosedout": {
+           "map": "function(doc) { \n\n\tfor ( itr in doc.appointment ) {\n\n\tif ( \tdoc.appointment[itr].status == \"closed\" && doc.appointment[itr].type == \"OUT\") {\n\n\t\t  emit(doc.appointment[itr].date, 1);\n\n\t\t}\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "lst1yrappt": {
+           "map": "function(doc) {\n\tvar d = new Date() ;\n\tvar curDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' 23:59:59' ;\n\tvar d1 = new Date(curDate);\n\tvar curUTC = d1.getTime() ;\n        var weekBeforeUTC = curUTC - (365*24*60*60*1000) ;\t\n\tvar day = [\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\",\"Oct\",\"Nov\",\"Dec\"] ;\n\tfor ( itr in doc.appointment )\n\t{\n\t\tif ( doc.appointment[itr].status == 'closed' )\t\n\t\t{\n\t\t\ttry {\n\t\t\t\tapptDate = new Date (doc.appointment[itr].date) ;// Get current days UTC time\n\t\t\t\tcurrTime = apptDate.getTime();\n\t\t\t\tif ( currTime>= weekBeforeUTC && currTime<=curUTC )\n\t\t\t\t\temit(day[apptDate.getMonth()],1);\n\t\t\t}\n\t\t\tcatch(e){}\t\n\t\t}\n\t}\n}",
+           "reduce": "function (keys, values) {\n\treturn sum(values);\n}"
+       },
+       "patientOpenAppt": {
+           "map": "function(doc) {\n\tvar d = new Date() ;\n\tvar curDate = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' 00:00:00' ;\n\tvar d1 = new Date(curDate);\n\tvar curUTC = d1.getTime() ;\n\tfor ( itr in doc.appointment )\n\t{\n\t\tif ( doc.appointment[itr].status == 'open' )\t\n\t\t{\n\t\t\tif (doc.appointment[itr].type=='OUT')\n\t\t\t{\n\t\t\t\ttry {\n\t\t\t\t\tapptDate = new Date (doc.appointment[itr].date) ;// Get current days UTC time\n\t\t\t\t\tcurrTime = apptDate.getTime();\n\t\t\t\t\tif ( currTime>= curUTC )\n\t\t\t\t\t\temit(doc._id,doc.appointment[itr]);\n\t\t\t\t}\n\t\t\t\tcatch(e){}\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\temit(doc._id,doc.appointment[itr]);\n\t\t\t}\n\t\t\t\n\t\t}\n\t}\n}"
+       },
+       "patientCloseAppt": {
+           "map": "function(doc) {\n\tfor ( itr in doc.appointment )\n\t{\n\t\tif ( doc.appointment[itr].status == 'closed' )\t\n\t\t{\n\t\t\temit(doc._id,doc.appointment[itr]);\n\t\t}\n\t}\n}"
+       },
+       "todayAppt": {
+           "map": "function(doc) {\n\tfor ( i in doc.appointment )\n\t{\t\n\t\tif ( doc.appointment[i].type == 'OUT' )\n\t\t{\n\t\t\temit ( doc.appointment[i].date , \n\t\t\t{ nbr:doc.appointment[i].nbr ,\n\t\t\t  apptDate:doc.appointment[i].date,\n\t\t\t  status:doc.appointment[i].status} ) ;\n\t\t}\n\t}\n}"
+       }
+   },
+   "language": "javascript"
+}
+service
+-------
+{
+   "_id": "_design/service",
+   "_rev": "6-f8e06bf5cd00157cabfca398d5a680f3",
+   "language": "javascript",
+   "views": {
+       "serviceId": {
+           "map": "function(doc) {\n  emit(null, doc._id);\n}",
+           "reduce": "function (keys,values){ return Math.max.apply({},values);}"
+       },
+       "serviceInfo": {
+           "map": "function(doc) {\n  emit(doc.desc, doc);\n}"
+       }
+   }
+}
+
+summary
+-------
+{
+   "_id": "_design/summary",
+   "_rev": "2-94a1ba78cb0fc9825119b34e04157f7b",
+   "language": "javascript",
+   "views": {
+       "summaryId": {
+           "map": "function(doc) {emit(null, doc._id);}",
+           "reduce": "function(keys,values){return Math.max.apply({},values) ;}"
+       }
+   }
+}

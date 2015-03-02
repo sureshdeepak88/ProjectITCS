@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!--<link href="css/theme.css" rel="stylesheet" />-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    
+
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>-->
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <!--<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/src/js/bootstrap-datetimepicker.js"></script>-->
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="innerBody" onload="fillPatient()">
+    <form method="post" action='1002.html'>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel_Shadow">
+                            <div class="PatientFormHeader panel-heading">
+
+                                <h2 class="panel-title">Patient Details</h2>
+                            </div>
+                            <div class="PatientFormTable  ">
+                                <div class="FormField">
+                                    <label class="FormLabel">Name<span class="mandotory_star">*</span></label>
+                                    <input type="text" tabindex="1" autocomplete="off" name="name" class="form-control" id="FormFirstName" placeholder="Enter Name" data-validation="required" data-validation-error-msg=" ">
+                                </div>
+
+                                <div class="FormField">
+                                    <label class="FormLabel">Gender</label>
+                                    <div>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default active">
+                                                <input type="radio" tabindex="2" name="gender" value="Male" id="GenderMale" checked>
+                                                Male
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="gender" value="Female" id="GenderFemal">
+                                                Female
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Occupation</label>
+                                    <input type="text" autocomplete="off" class="form-control" id="FormOccupation" name="occupation" placeholder="Enter Occupation">
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Date of Birth<span class="mandotory_star">*</span></label>
+                                    <!--<div class="input-group date form_date " data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>-->
+                                    <input type="hidden" id="dtp_input2" value="" />
+                                    <div class="input-group date" id="datetimepicker1">
+                                        <input type="text" name="dateOfBirth" class="form-control CalAge" id="datepicker"
+                                               placeholder="Enter Date Of Birth" data-validation="required" data-validation-error-msg=" ">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                    <!--<input type="text" autocomplete="off" name="dateOfBirth" class="form-control" id="datepicker" placeholder="Enter Date Of Birth"
+                                           data-validation="required" data-validation-error-msg=" " data-validation-format="dd/mm/yyyy">-->
+
+
+
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Age</label>
+                                    <input name="age" autocomplete="off" disabled type="text" class="form-control" id="FormAge" placeholder="">
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Marital Status</label>
+
+                                    <div>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default active">
+                                                <input type="radio" name="maritalStatus" value="Single" id="Radio1" checked>
+                                                Single
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="maritalStatus" value="Married" id="Radio2">
+                                                Married
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class=" InstructionText inPatientText">
+                                    In case of emergency contact
+                                </p>
+                                <div class="FormField">
+                                    <label class="FormLabel">Name</label>
+                                    <input autocomplete="off" name="primaryContact" type="text" class="form-control" id="Text1" placeholder="Enter Name">
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Contact</label>
+                                    <input autocomplete="off" name="primaryContactNbr" type="text" class="form-control" id="Text2" placeholder="Enter Mobile or Phone Number ">
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel_Shadow">
+                            <div class="PatientFormHeader panel-heading">
+                                <h2 class="panel-title">Contact Details</h2>
+                            </div>
+                            <div class="PatientFormTable">
+                                <div class="FormField">
+                                    <label class="FormLabel">Contact Number<span class="mandotory_star">*</span></label>
+                                    <input autocomplete="off" name="contactNo" type="text" class="form-control" id="ContactMobile" placeholder="Enter Mobile Number" data-validation="custom" data-validation="required" data-validation-error-msg=" "
+                                           data-validation-regexp="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$" />
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Address Line1</label>
+                                    <input autocomplete="off" name="addressLine1" type="text" class="form-control" id="ConatcAddress1" placeholder="Enter Address " />
+
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Address Line2</label>
+                                    <input autocomplete="off" name="addressLine2" type="text" class="form-control" id="ConatcAddress2" placeholder="Enter Address " />
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">City</label>
+                                    <input autocomplete="off" name="city" type="text" class="form-control" id="ContactCity" placeholder="Enter City" />
+                                </div>
+                                <div class="FormField">
+                                    <label class="FormLabel">Pincode</label>
+                                    <input autocomplete="off" name="pin" type="text" class="form-control" id="ContactPincode" placeholder="Enter Pincode" />
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div style="text-align:center">
+                            <input class="btn btn-success button_formsubmit" type='submit' value='Submit' id="addPatientSubmit">&nbsp;&nbsp;&nbsp;
+                            <input class="btn btn-default button_formreset" type='reset' value='Reset'>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" name="itcsdata" value="" id="itcsdata">
+    </form>
+
+
+
+
+
+    <script src="js/jquery.loadJSON.js"></script>
+    <script src="js/vendor/jquery.form-validator.min.js"></script>
+    <script src="js/commonScript.js"></script>
+
+    <script>
+        $.validate();
+        function captureResponse(err) {
+            if (err == "Error")
+                parent.myAlert("Error updating patient information");
+            else
+                parent.myAlert("Patient information updated successfully");
+        }
+        function fillPatient() {
+            var id = window.location.href;
+            if (typeof id != 'undefined' && id != '') {
+                try {
+                    id = unescape(id.substring(id.lastIndexOf('?') + 9));
+                }
+                catch (e) { }
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+		d = new Date() ;
+        $('#datetimepicker1').datetimepicker({
+            format: 'MM/DD/YYYY',
+			maxDate:d
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+
+    <link href="css/customStyle.css" rel="stylesheet" />
+    
+
+    <!--Stylesheets Plugin-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!--link href="css/theme.css" rel="stylesheet" />-->
+
+    <link href="css/app.css" rel="stylesheet" />
+    
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <header class="header">
+        <div class="PositionedHeader">
+            <div class="Logo">
+                <img src="../images/logo.png" /><span> Sri Raghavendra Hospital</span>
+            </div>
+            <div class="icon_right">
+                <ul>
+                    <li><a style="display:block;"  href="/"><i class="fa fa-home"></i></a></li>
+                    <li><a style="display:block;" href="javascript:void(0)" onclick="closeApplication()"><i class="fa fa-close"></i></a></li>
+                    <li><a class="pdf" style="display:block;" href="#" data-toggle="modal" data-target="#myModalPdf"><i class="fa fa-location-arrow"></i></a></li>
+                    
+                    <li>
+                        <a class="SliderControl plus "><i class="fa fa-plus-square-o"></i></a>
+                        <a class="SliderControl minus  icon-show "><i class="fa fa-minus-square-o"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="ParentIframeContainer">
+        <div class="leftcolumn" id="leftAjaxContent">
+            <iframe src="home.html" frameborder="0" class="FramePatient"></iframe>
+        </div>
+        <div class="SideBar_Content ">
+            <header class="panel-heading">
+                <button id="btnAddPatient" class="btn  btn-success pull-right"><strong>+ </strong>  Add Patient</button>
+                <h2 class="panel-title SearchPatient">Search Patient</h2>
+                <p class="panel-subtitle">
+                </p>
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label class="control-label">Name/Mobile Number</label>
+                            <input autocomplete="off" id="searchField" type="text" name="firstname" class="form-control" onkeyup="getData(1001,this.value)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row searchrow">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div id="searchinfo" class="form-group">
+                            <ul id="searchinfoId" class="Patient_List"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span><img class="info_icon" src="../images/info_icon.png" /> </span> </h4>
+                </div>
+                <div id='alertText' class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Footer_Fixed Logo_Footer">
+        <div class="">
+            <!--<img src="../images/logo.png" /><span> Sri Raghavendra Hospital</span>-->
+            <div style="display:block;width:100%;float:none; margin:0 auto; font-size:8px; color:#F0F0F0;">Powered By ITCS</div>
+        </div>
+
+
+    </div>
+    <script src="js/commonScript.js"></script>
+    <script>
+        function fillPatientDetail(obj) {
+            var jsonData = obj.getAttribute("jsondata");
+            $('.FramePatient').attr('src', '3000.html?jsonVal=' + escape(jsonData));
+            
+        }
+		function showSearchResult(resp)
+		{
+			var searchInfo = document.getElementById("searchinfoId");
+			searchInfo.innerHTML = '';
+			if (!resp.rows.length)
+				searchInfo.innerHTML = "<li style='background-color:#FFFFFF'><a><center>No patients found.</center></a></li>";
+			for (i = 0 ; i < resp.rows.length ; i++) {
+				var tempdiv = document.createElement("li");
+				var jsonData = JSON.stringify(resp.rows[i].value);
+				tempdiv.innerHTML = '<a><span class="SearchPatientName">' + resp.rows[i].value.name + '</span><span class="SearchPatientNumber">' + resp.rows[i].value.contactNo + '</span></a>';
+				tempdiv.setAttribute('onclick', 'fillPatientDetail(this)');
+				tempdiv.setAttribute('jsondata', jsonData);
+				searchInfo.appendChild(tempdiv);
+			}
+		}
+		function closeApplication ()
+		{
+			r = confirm("Are you sure you want to close the application ?") ;
+			if ( r == true ) 
+				getData (9001) ;
+			return false ;	
+		}
+		function getData(url, data) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {	// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    resp = JSON.parse(xmlhttp.responseText);
+                    if (resp.error) {
+                        alert("Internal error");
+                        return;
+                    }
+                    switch (parseInt(url)) {
+                        case 1001:
+                            showSearchResult(resp) ;
+                            break;
+                        case 9001:
+                            if (resp.response == 'ok') {
+							   window.open('','_self').close();
+							}
+                            break;
+                    }
+                }
+            }
+			if (data)
+				xmlhttp.open("GET", url + ".html?searchVal="+escape(data), true);
+			else
+				xmlhttp.open("GET", url + ".html", true);	
+            xmlhttp.send();
+        }
+        function myAlert(errMsg) {
+            $('#alertText').text(errMsg);
+            $('#myModal').modal();
+            $('#myModalPdf').modal();
+            
+        }
+        $(document).ready(function () {
+            $('.pdf').click(function () { 
+                var winheght = ($(window).height() - 150);
+                var winwidth = ($(window).width() - 50);
+            $('.PdfModelBody').css('min-height', winheght + 'px');
+            $('.pdfwidth').css('min-width', winwidth + 'px');
+            });
+        });;
+    </script>
+    <div class="modal fade PdfModel" id="myModalPdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog pdfwidth">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Header
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body PdfModelBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

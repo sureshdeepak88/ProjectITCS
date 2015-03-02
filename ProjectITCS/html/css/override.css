@@ -1,0 +1,16 @@
+﻿html, body {
+/*background: #ecedf0;*/
+width: 100%;
+}
+body {
+    font-family: Open Sans;
+    /*font-family: 'Open Sans Condensed', sans-serif;*/
+    background-color: #E8E8E8;
+    color: #777;
+    line-height: 22px;
+    margin: 0;
+    font-size: 13px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+

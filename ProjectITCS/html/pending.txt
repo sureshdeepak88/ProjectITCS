@@ -1,0 +1,60 @@
+Pending Tasks in Page
+---------------------
+
+
+1000.html
+---------
+a. Edit patient							-  Can complete
+b. Prevent selecting future date in DOB
+
+3000.html
+---------
+a. Display icons based on chosen open appointments and closed appointments				- Can Complete
+b. During admission creation, fetch additional optional value as "Advance payment"		- 
+c. Automatic reloading of open appointments on addition of new appointments 			- Can Complete
+d. In case of open Admissions, If advance is provided display the value, else display a text box to fetch the advance amount 
+e. UI to choose token printer when print token/print advance receipt icon is chosen. Option should also be provided to set a printer as default
+f. On clicking bill generation, Traverse to bill generation/casesheet/summary page and pre-fill available data - Can Complete
+g. Fill doctor information in the drop down based on the available doctors in the chosen appointment time - Can Complete
+f. Proper CSS for displaying no records for open and close visits
+g. Show popup iframe to display the  bills and documents for printing
+h. Do not allow appointment to be chosen less than the current time
+
+
+home.html
+---------
+1. Handle capture response function to display pdfs - Can Complete
+2. Next token number details to be shown
+
+index1.html
+-----------
+1. Scroll bar issue to be corrected
+2. Display no records for doctor and service when 0 records are returned from server
+
+4000.html 
+----------
+a. Fill service details based on the available services			- To Do
+b. If doc specific service, In the description provide a drop down list of all the doctors - To do
+c. Show amount to be received and to be paid based on the bill and advance
+d. form JSON and submit - To Do
+e. Show appointment date in the page
+
+5000.html and 6000.html
+-----------------------
+a. Full page to be constructed
+
+
+Pending task in server
+----------------------
+a. To handle receipt printing and token printing - To do
+b. Request to handle advance submission - To do 
+c. Request response to show Next token number details - To do
+d. Audit logs (If time permits)
+
+Pending tasks in utility
+------------------------
+a. To handle password change option for Admin - To do
+
+
+
+

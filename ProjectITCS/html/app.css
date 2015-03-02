@@ -1,0 +1,1796 @@
+﻿.SideBar_Content {
+    background-color: #fff;
+    width: 300px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: block;
+    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 40px;
+    -webkit-box-shadow: -1px 0 1px 0 rgba(0,0,0,.3);
+    -moz-box-shadow: -1px 0 1px 0 rgba(0,0,0,.3);
+    box-shadow: -1px 0 1px 0 rgba(0,0,0,.3);
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+
+.header {
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    position: fixed;
+    display: block;
+    width: 100%;
+    background-color: #FAFAFA;
+    z-index: 1001;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 8px 6px -6px rgba(0,0,0,.5);
+    box-shadow: 0 8px 6px -6px rgba(0,0,0,.5);
+    top: 0px;
+}
+
+.header {
+    position: fixed;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+.icon_right {
+    display: block;
+    width: 50%;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    height: 40px;
+}
+
+    .icon_right ul {
+        float: right;
+        margin: 0px;
+        padding: 0px;
+        display: block;
+        margin-right: 15px;
+        list-style: none;
+    }
+
+        .icon_right ul li {
+            display: inline-block;
+        }
+
+            .icon_right ul li a {
+                height: 30px;
+                width: 30px;
+                display: block;
+                padding-top: 5px;
+                padding-left: 7px;
+                margin-top: 5px;
+                display: none;
+            }
+
+                .icon_right ul li a i {
+                    font-size: 20px;
+                    color: #007aff;
+                }
+
+.Logo_Footer {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: Raleway;
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+    display: block;
+}
+
+    .Logo_Footer img {
+        height: 15px;
+    }
+
+.Logo {
+    height: 40px;
+    width: 50%;
+    float: left;
+}
+
+    .Logo img {
+        height: 40px;
+        position: relative;
+        top: -4px;
+        padding: 3px 5px;
+        padding-right: 0px;
+    }
+
+    .Logo span {
+        line-height: 40px;
+        margin: 0px;
+        padding: 0px;
+        font-weight: 400;
+        text-transform: uppercase;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        color: #007aff !important;
+        font-family: Raleway;
+    }
+
+.SliderControl.icon-show {
+    display: block;
+}
+
+body {
+    /*font-family: Open Sans !important;*/
+    font-family: 'Open Sans';
+    background-color: #ecedf0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Raleway;
+}
+
+label {
+    margin-bottom: 2px;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+}
+
+.Header_Section {
+    z-index: 1030;
+    margin-bottom: 0;
+    border-radius: 0;
+    min-height: 60px;
+    max-height: 60px;
+    background-color: #4c4c4c;
+    border-bottom: 1px solid #c9c9c9;
+    box-shadow: none;
+    background-repeat: repeat-x;
+    position: fixed;
+    right: 0;
+    left: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    border-left-style: none;
+    border-left-color: inherit;
+    border-left-width: 0;
+    border-right-style: none;
+    border-right-color: inherit;
+    border-right-width: 0;
+    border-top-style: none;
+    border-top-color: inherit;
+    border-top-width: 0;
+}
+
+
+
+.MainContent {
+    margin-top: 90px;
+}
+
+.Header_Section {
+    z-index: 1030;
+    margin-bottom: 0;
+    border-radius: 0;
+    min-height: 60px;
+    max-height: 60px;
+    background-color: #4c4c4c !important;
+    border-bottom: 1px solid #c9c9c9;
+    box-shadow: none;
+    background-repeat: repeat-x;
+    border-left-style: none;
+    border-left-color: inherit;
+    border-left-width: 0;
+    border-right-style: none;
+    border-right-color: inherit;
+    border-right-width: 0;
+    border-top-style: none;
+    border-top-color: inherit;
+    border-top-width: 0;
+}
+
+
+
+.MainContent {
+    margin-top: 90px;
+}
+
+.panel-heading {
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid #DADADA;
+    padding: 18px;
+    position: relative;
+}
+
+.panel-title {
+    color: #33353f;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0;
+    text-transform: none;
+}
+
+.panel-subtitle {
+    color: #808697;
+    font-size: 12px;
+    line-height: 1.2em;
+    margin: 7px 0 0;
+    padding: 0;
+}
+
+.panel-actions {
+    position: absolute;
+}
+
+body .btn-primary {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #0088cc;
+    border-color: #0088cc;
+}
+
+    body .btn-primary:hover {
+        border-color: #0099e6 !important;
+        background-color: #0099e6;
+    }
+
+.panel_Shadow {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -webkit-box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+    box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+}
+
+.ParentIframeContainer {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+
+
+
+
+.btn span.fa {
+    padding: 0px 10px 0 0;
+}
+
+.Search_Panel {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    -webkit-box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+    box-shadow: 0px 0.5px 2px 0px rgba(0,0,0,0.45);
+    margin: 15px;
+    background-color: #F0F0F0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.Search_Panel_Header {
+    margin: 10px;
+}
+
+.Patient_List {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 10px;
+}
+
+    .Patient_List li {
+        padding: 10px 10px;
+        list-style: none;
+        border-bottom: 1px solid #DCDCDC;
+        background-color: #F0F0F0;
+        transition: background-color 0.9s ease;
+        cursor: pointer;
+    }
+
+        .Patient_List li a .SearchPatientName {
+            display: block;
+            line-height: 20px;
+            font-size: 13px;
+        }
+
+        .Patient_List li a .SearchPatientNumber {
+            display: block;
+            line-height: 15px;
+            font-size: 11px;
+        }
+
+        .Patient_List li:hover {
+            background-color: #fcf8e3;
+        }
+
+            .Patient_List li:hover a {
+                color: #8a6d3b;
+            }
+
+        .Patient_List li a {
+            color: #484848;
+            text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04);
+        }
+
+            .Patient_List li a:hover {
+                text-decoration: none;
+            }
+
+.panel-footer {
+    padding: 0px;
+}
+
+.Patient_Name {
+    display: block;
+    width: 100%;
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.Patient_Number {
+    display: block;
+    width: 100%;
+    line-height: 15px;
+    font-size: 11px;
+}
+
+.Patient_List a {
+}
+
+.App_Logo {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 50px;
+    letter-spacing: 0.5px;
+    color: #EAEAEA;
+    margin-left: 20px;
+}
+
+.btn-default.active {
+    /*background-color:#059de3;
+    color:#FFF;*/
+}
+
+.FormField {
+    margin-bottom: 12px;
+}
+
+.innerBody {
+    padding: 30px;
+}
+
+#result {
+}
+
+
+
+.PatientSubPage {
+}
+
+.AddPatientMargin {
+    margin: 20px 50px;
+}
+
+.PatientFormTable {
+    padding: 15px;
+    margin-bottom: 0px;
+}
+
+.panel_Shadow {
+    margin-bottom: 10px;
+}
+
+.InstructionText {
+    font-size: 14px;
+    font-style: italic;
+    color: #BABABA;
+}
+
+.adjustHeight {
+    min-height: 20px;
+}
+
+.PatientType {
+    margin-bottom: 15px;
+}
+
+.FormLabelPatientType {
+    font-size: 15px;
+    margin-right: 30px;
+}
+
+.PatientTypeRadio label.btn {
+    line-height: 25px;
+}
+
+.btn-default.active {
+    background-color: #007AFF !important;
+    /* background-color: #059de3; */
+    color: #FFF !important;
+}
+
+.btn input {
+    width: 80%;
+    height: 35px;
+}
+
+.leftcolumn {
+    background-color: transparent;
+}
+
+
+
+.PatientRadio {
+    margin-bottom: 30px;
+}
+
+.PatientForm {
+    margin-bottom: 10px;
+}
+
+. /* panel-title.SearchPatient {
+    font-size: 18px;
+} */
+.searchrow .col-md-12 {
+    padding: 0px;
+}
+
+body {
+}
+
+
+
+.InstructionText.inPatientText {
+    margin-bottom: 31px;
+}
+
+.SearchPatient {
+    padding-top: 7px;
+}
+
+#btnAddPatient {
+    position: relative;
+    padding-left: 30px;
+}
+
+    #btnAddPatient strong {
+        margin: 0px;
+        padding: 0px;
+        line-height: 10px;
+        position: absolute;
+        font-size: 22px;
+        left: 11px;
+        top: 11px;
+    }
+
+.button_formsubmit {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-image: URL('../images/save_icon.png');
+    background-size: 15px 16px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+    padding-left: 31px;
+}
+
+.button_formreset {
+    background-image: URL('../images/reset_icon.png');
+    color: #0a5fb2;
+    background-size: 15px 16px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+    padding-left: 31px;
+}
+
+.button_formedit {
+    background-image: URL('../images/edit_icon.png');
+    color: #0a5fb2;
+    background-size: 15px 16px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+    padding-left: 31px;
+}
+
+.mandotory_star {
+    color: #eb2f11;
+    margin-left: 0px;
+}
+
+.ShowContainer {
+    display: block;
+}
+
+.RemoveContainer {
+    display: none;
+}
+
+.Footer_Fixed {
+    position: fixed;
+    width: 100%;
+    background-color: #3A3A3A;
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    left: 0px;
+    bottom: 0px;
+    padding: 3px;
+}
+
+.modal-body {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    min-height: 100px;
+}
+
+.info_icon {
+    height: 70px;
+    position: relative;
+    margin-left: -20px;
+}
+
+.modal-header {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.modal-dialog {
+    width: 400px;
+}
+
+.FormLabel {
+    font-weight: 600;
+}
+
+/*.Inpatient_Panel{
+display:none;
+}*/
+
+#CurrentDate {
+    top: 6px;
+    position: relative;
+    letter-spacing: 4px;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+}
+
+.font_rupees {
+    font-size: 16px !important;
+    font-weight: 500;
+}
+
+.widget_bgpattern {
+    margin: 0 auto;
+    float: none;
+    display: block;
+    width: 100%;
+}
+
+.Page_View {
+    padding: 20px;
+}
+
+.Page_View_top input {
+    border: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.Header_Appointment {
+    margin: 0 auto;
+    padding: 0px;
+    float: none;
+    position: relative;
+    width: 250px;
+    font-size: 22px;
+    font-weight: 300;
+    padding: 10px 0px;
+    text-align: center;
+    color: #33353f;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 0;
+    text-transform: none;
+}
+
+.Page_View.panel_Shadow {
+    font-size: 13px;
+}
+
+.Page_View_top.panel_Shadow input {
+    font-size: 13px;
+    background-color: transparent;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.appointment_form_input {
+    background-color: transparent;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px;
+    padding: 0px;
+    width: 200px;
+}
+
+.appointment_form_label {
+    width: 200px;
+    white-space: nowrap;
+    background-color: transparent;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    margin: 0px;
+    padding: 0px 5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.colon_form {
+    float: right;
+    margin: 0px 5px;
+}
+
+.Page_View_top {
+    padding: 10px 30px;
+    padding-bottom: 40px;
+}
+
+.Previous_record .appointment_form_label {
+    width: 200px;
+}
+
+.appointment_form_input input {
+    background-color: transparent;
+    border: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.PatientRecoerds {
+}
+
+.button_container {
+    float: right;
+}
+
+.Button_Margin {
+    margin-top: 288px;
+}
+
+.FramePatient {
+    margin-top: 40px;
+    width: 100%;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+
+.stats-counter h3 {
+    font-weight: 600;
+}
+
+.stats-counter h6 {
+    font-family: 'Open Sans';
+}
+
+.TabHeader {
+    width: 100%;
+    display: block;
+    -webkit-box-shadow: 0 8px 6px -10px black;
+    -moz-box-shadow: 0 8px 6px -10px black;
+    box-shadow: 0 8px 6px -10px black;
+}
+
+
+.TabHeaderPanel {
+    -webkit-box-shadow: 0 8px 6px -10px black;
+    -moz-box-shadow: 0 8px 6px -10px black;
+    box-shadow: 0 8px 6px -10px black;
+    margin: 0px;
+}
+
+.AppointmentTab > li {
+    width: 25%;
+    margin-bottom: 15px;
+}
+
+    .AppointmentTab > li > a {
+        padding: 0px;
+        margin-left: 15px;
+    }
+
+.tab-content > .tab-pane, .pill-content > .pill-pane {
+    margin: 0px;
+    padding: 0px;
+}
+
+.AppointmentTab > li > a.firstTab {
+    margin-left: 0px;
+}
+
+.nav.nav-tabs.AppointmentTab {
+    border: none;
+}
+
+.CollapsecolMargin {
+    padding-right: 0px;
+}
+
+.InfoHeader, .infoRow {
+    display: block;
+    width: 100%;
+}
+
+.InfoHeader {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+    .InfoHeader h5 {
+        margin: 0px;
+        background-color: #F0F0F0;
+        font-weight: 500;
+        padding: 7px 0px;
+        border-bottom: 1px solid #DADADA;
+        font-size: 13px;
+        font-family: 'Open Sans';
+        position: relative;
+    }
+
+.InfoContainer .infoRow {
+    padding: 12px 0px;
+    border-bottom: 1px solid #DADADA;
+}
+
+    .InfoContainer .infoRow:nth-child(odd) {
+        background-color: #FBFBFB;
+    }
+
+.infoRow .fa {
+    min-width: 40px;
+    text-align: center;
+}
+
+.InfoHeader .fa-stack .fa-square {
+    color: #3c3c3c;
+}
+
+.infoRow .infoLabel {
+    padding-left: 6px;
+    display: inline-block;
+}
+
+.InfoHeaderLabel {
+    padding-left: 3px;
+    min-width: 160px;
+    display: inline-block;
+}
+
+.InfoHeader .fa-stack {
+    min-width: 40px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.coll_icon {
+    position: absolute;
+    padding: 7px;
+    margin: 0px;
+    padding-top: 6px;
+    font-size: 16px;
+    display: none;
+    display: inline;
+    right: 0px;
+    top: 0px;
+    color: #BCBCBC;
+    margin-top: 6px;
+}
+
+*.InfoHeader .coll_icon.coll_plus {
+    display: none;
+}
+
+.InfoHeader .coll_icon.coll_minus {
+    display: block;
+}
+
+.InfoHeader.collapsed .coll_icon.coll_plus {
+    display: block;
+}
+
+.InfoHeader.collapsed .coll_icon.coll_minus {
+    display: none;
+}
+
+.infoTextbox {
+    display: inline-block;
+    min-width: 300px;
+    width: 100%;
+}
+
+    .infoTextbox input, .infoTextbox select {
+        min-width: 300px;
+    }
+
+#CollapseAddAppointment .infoRow {
+    padding: 0px 0px;
+}
+
+    #CollapseAddAppointment .infoRow input {
+        /*border-top: none;
+        border-bottom: none;
+        border-right: none;*/
+        background-color: transparent;
+        height: 42px;
+        line-height: 42px;
+        width: 100%;
+    }
+
+    #CollapseAddAppointment .infoRow select {
+        /*border-top: none;
+        border-bottom: none;
+        border-right: none;*/
+        background-color: transparent;
+        height: 42px;
+        width: 100%;
+    }
+
+#CollapseAddAdmission .infoRow {
+    padding: 0px 0px;
+}
+
+    #CollapseAddAdmission .infoRow input {
+        /*border-top: none;
+        border-bottom: none;
+        border-right: none;*/
+        background-color: transparent;
+        height: 42px;
+        width: 100%;
+    }
+
+    #CollapseAddAdmission .infoRow select {
+        /*border-top: none;
+        border-bottom: none;
+        border-right: none;*/
+        background-color: transparent;
+        height: 42px;
+        width: 100%;
+    }
+
+        #CollapseAddAdmission .infoRow select option {
+            width: 100%;
+        }
+
+.HideTextbox {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.PatientRow {
+    display: block;
+    width: 25%;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    background-color: #FFF;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: #3c3c3c;
+    -webkit-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+}
+
+    .PatientRow input {
+        font-size: 13px;
+        color: #3c3c3c !important;
+        height: 18px;
+        line-height: 18px;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .PatientRow .infoLabel {
+        width: auto;
+        font-weight: 500;
+    }
+
+    .PatientRow .infoText {
+        width: auto;
+    }
+
+    .PatientRow .fa {
+        min-width: 10px;
+        width: auto;
+    }
+
+    .PatientRow input[disabled]:hover, input[disabled]:focus {
+        font-size: 13px;
+        color: #3c3c3c !important;
+        height: 18px;
+        line-height: 18px;
+        background-color: transparent;
+    }
+
+.Generatebill .PatientRow {
+    width: 25%;
+}
+
+.RightIcons {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    float: right;
+    margin-top: -26px;
+    margin-right: 0px;
+}
+
+    .RightIcons .fa-stack {
+        font-size: 16px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+        .RightIcons .fa-stack .fa-square {
+            color: transparent !important;
+            background-color: #EAEAEA;
+            background: #ffffff; /* Old browsers */
+            /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2YxZjFmMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2UxZTFlMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmNmY2ZjYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+            background: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* IE10+ */
+            background: linear-gradient(to bottom, #ffffff 0%,#f1f1f1 50%,#e1e1e1 51%,#f6f6f6 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-8 */
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0px 1px 1px 1px rgba(0,0,0,.3);
+        }
+
+    .RightIcons .fa-inverse {
+        color: #5c5c5c !important;
+        font-size: 22px;
+    }
+
+
+
+.PrintLink {
+}
+/*. {
+
+}
+46BFBD
+#F7464A*/
+/*#FDB45C*/
+/*#5cb85c*/
+
+
+.FormField .btn-group input[type="checkbox"], input[type="radio"] {
+    margin-top: -7px;
+    height: 10px;
+}
+
+.icon-right {
+}
+
+.DatePicker_Row .col-lg-4 .fa, .DatePicker_Row .col-lg-8 {
+    line-height: 42px;
+    height: 42px;
+}
+
+.date {
+    width: 100% !important;
+}
+
+.DatePicker_Row .input-group-addon {
+    background-color: #EAEAEA;
+    border: 1px solid #EAEAEA;
+    border-right: 1px solid #DADADA;
+    border-left: 1px solid #DADADA;
+    border-radius: 0px;
+}
+
+.has-error #CollapseAddAppointment .infoRow input {
+    border: 1px !important;
+}
+
+
+
+.noButtons {
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+}
+
+.infoTextbox.FormField input, .infoTextbox.FormField select {
+    border-top: none;
+    border-bottom: none;
+}
+
+.infoTextbox.FormField.has-error input {
+    border: 1px dotted #a94442 !important;
+    border-radius: 0px !important;
+}
+/*.infoTextbox.FormField.has-success input {
+    border:1px dotted #3c763d !important;
+    border-radius:0px !important;
+}*/
+
+.infoTextbox.FormField.has-error input-group-addon {
+    border: 1px dotted #a94442 !important;
+    border-radius: 0px !important;
+}
+/*.infoTextbox.FormField.has-success input-group-addon {
+      border:1px dotted #3c763d !important;
+    border-radius:0px !important;
+}*/
+.DatePicker_Row .has-error .input-group-addon {
+    border: 1px dotted #a94442 !important;
+    border-radius: 0px !important;
+    background-color: #f2dede;
+}
+/*.DatePicker_Row .has-success .input-group-addon {
+         border:1px dotted #3c763d !important;
+    border-radius:0px !important;
+    background-color: #e0ffe1;
+}*/
+
+/* Stats Counter */
+.stats-counter-sec {
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+    float: left;
+    margin-top: 15px;
+    width: 100%;
+}
+
+    .stats-counter-sec .row > div {
+        padding: 0;
+    }
+
+    .stats-counter-sec .row {
+        margin: 0;
+    }
+
+.stats-counter {
+    background: none repeat scroll 0 0 #ffffff;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -o-border-radius: 1px;
+    border-radius: 1px;
+    float: left;
+    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+    .stats-counter:hover {
+        background: none repeat scroll 0 0 #fbfbfb;
+    }
+
+    .stats-counter:before {
+        background: none repeat scroll 0 0 #ecedf0;
+        content: "";
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+    }
+
+    .stats-counter > h3 {
+        color: #777777;
+        float: left;
+        font-size: 13px;
+        letter-spacing: 0.3px;
+        line-height: 10px;
+        margin: 20px 0 15px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .stats-counter > span {
+        color: #333333;
+        float: left;
+        font-size: 31px;
+        font-weight: 600;
+        line-height: 24px;
+        margin-bottom: 11px;
+        margin-top: -2px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .stats-counter > i {
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+        display: table;
+        float: none;
+        font-size: 14px;
+        height: 29px;
+        line-height: 29px;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+        width: 29px;
+    }
+
+    .stats-counter > h6 {
+        background: none repeat scroll 0 0 #f5f5f5;
+        border-top: 1px solid #ecedf0;
+        color: #777;
+        float: left;
+        font-size: 14px;
+        font-weight: normal;
+        margin: -15px 0 0;
+        padding: 22px 0 17px;
+        width: 100%;
+    }
+
+.infoTextbox.FormField input {
+    display: block;
+}
+
+.AppointmentTab h2 {
+    font-size: 22px;
+    font-weight: 300;
+    margin: 0px;
+}
+
+.infoTextbox.FormField .date.has-successs {
+    color: #555;
+}
+
+.has-success .input-group-addon {
+    color: #555;
+}
+
+.has-success .form-control {
+    border-color: #aeacb4;
+}
+
+.selectServiceList {
+}
+
+    .selectServiceList li {
+        list-style: none;
+        text-align: center;
+        padding: 5px 20px;
+        font-size: 12px;
+        font-weight: 400;
+        display: inline-block;
+        position: relative;
+        float: left;
+        margin-right: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 1px 2px rgba(0,0,0,.4);
+        -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.4);
+        -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.4);
+        text-transform: uppercase;
+        font-family: Raleway;
+        letter-spacing: 1px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-indent: 5px;
+    }
+
+        .selectServiceList li.serviceboxadd {
+            background-color: #007AFF;
+            color: #FFF;
+            background-image: url('../images/tickWhite.png');
+            background-size: 10px;
+            background-repeat: no-repeat;
+            background-position: 9px 9px;
+        }
+
+.Header_Table {
+    width: 100%;
+}
+
+    .Header_Table tr th {
+        background-color: #edf7ff;
+        padding: 8px 10px;
+        font-weight: 400;
+        font-size: 14px;
+        border-bottom: 1px solid #dadada;
+        font-weight: 500;
+    }
+
+        .Header_Table tr th.column1 {
+            width: 20% !important;
+        }
+
+    .Header_Table tr td.particulars {
+        width: 20% !important;
+    }
+
+    .Header_Table tr td {
+        background-color: #FFFFFF;
+        padding: 5px 10px;
+        font-weight: 400;
+        font-size: 12px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #dadada;
+        width: 25%;
+        border-right: 1px solid #EAEAEA;
+    }
+
+    .Header_Table tr:nth-child(odd) td {
+        background-color: #FAFAFA;
+    }
+
+    .Header_Table tr td input {
+        border: 1px solid #EFEFEF;
+        text-align: right;
+    }
+
+        .Header_Table tr td input + input {
+            margin-left: 5px;
+        }
+
+            .Header_Table tr td input + input + input + input {
+                text-align: right;
+            }
+
+.Row_Table {
+    width: 100%;
+}
+
+    .Row_Table tr td {
+        width: 25%;
+        padding: 10px 0px;
+    }
+
+.column4 {
+    text-align: right;
+}
+
+.RowTotal {
+    text-align: right;
+}
+
+#earnings {
+    text-align: right;
+}
+
+.Amount, .qty {
+    float: none;
+    text-align: center;
+}
+
+th.check, td.check {
+    width: 50px !important;
+}
+
+.bill_button .fa-stack {
+    font-size: 18px;
+}
+
+
+
+
+
+.CollapseContainer .infoRow {
+    padding: 0px 0px;
+}
+
+    .CollapseContainer .infoRow input {
+        background-color: transparent;
+        height: 42px;
+        line-height: 42px;
+        width: 100%;
+    }
+
+    .CollapseContainer .infoRow select {
+        background-color: transparent;
+        height: 42px;
+        width: 100%;
+    }
+
+.ActiveCost {
+    opacity: .35;
+}
+
+#ServiceStatus .btn.btn-default.active {
+    color: #FFF !important;
+}
+
+.TableView {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    width: 100%;
+}
+
+    .TableView.DoctorView .row {
+        margin: 0px;
+        padding: 0px;
+        font-size: 13.5px;
+    }
+
+        .TableView.DoctorView .row .col-md-3, .TableView .DoctorView .row .col-lg-3 {
+            margin: 0px;
+            padding: 0px;
+        }
+
+    .TableView.DoctorView .TableViewHeader .row .col-md-3.col-lg-3 {
+        padding: 10px 7px;
+        text-transform: uppercase;
+        background-color: #f9fcff;
+        font-weight: 500;
+        border-bottom: 1px solid #EAEAEA;
+        letter-spacing: .1px;
+        border-right: 1px solid #eaeaea;
+        font-size: 12px;
+    }
+
+
+    .TableView.DoctorView .TableViewData .row .col-md-3.col-lg-3 {
+        padding: 10px 7px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #EAEAEA;
+        background-color: transparent;
+    }
+
+    .TableView.DoctorView .TableViewData .row:nth-child(odd) {
+    }
+
+    .TableView.DoctorView .TableViewData .row .col-md-3.col-lg-3 {
+        border-right: 1px solid #eaeaea;
+    }
+
+    .TableView.DoctorView .TableViewData .row.disableDoc {
+        background-color: #fffcfc;
+        color: #a94442;
+    }
+
+    .TableView.DoctorView .TableViewData .row.enableDoc {
+        background-color: #fbfffa;
+        color: #3c763d;
+    }
+
+.btn_View {
+    padding: 5px 10px;
+    background-color: #007AFF;
+    color: #FFF;
+    font-size: 12px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+}
+
+/*.#a94442
+        .#f2dede
+        #dff0d8;
+border-color: #3c763d;*/
+
+
+.borderLeft {
+    border-left: 1px solid #c8c7cc;
+    padding-left: 5px;
+}
+
+.input-group.date.Timepicker {
+    margin-bottom: 5px;
+}
+
+.WeekDay {
+    padding-bottom: 5px;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.row.ChooseDate .col-md-3 {
+}
+
+#ChooseAvail .modal-dialog, #ViewAvail .modal-dialog {
+    width: 600px;
+}
+
+.row .col-md-4.center_Column {
+    margin: 0 auto;
+    float: none;
+}
+
+.WeekDay span.fa {
+    float: right;
+    margin-right: 5px;
+    font-size: 12px;
+    color: #3c3c3c;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+}
+
+.WeekTime .has-success .input-group-addon {
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.WeekTime .Timepicker input {
+    height: 28px;
+    line-height: 28px;
+}
+
+.infoRow.DatePicker_Row.InactiveRow {
+    display: none;
+}
+
+.TableViewData .CheckCol {
+    width: 5%;
+}
+
+.TableViewHeader .CheckCol {
+    width: 5%;
+}
+
+.TableViewData .ViewTimeCol {
+    width: 20%;
+}
+
+.TableViewHeader .ViewTimeCol {
+    width: 20%;
+}
+
+.CheckCol {
+    color: #3c3c3c;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.TableViewHeader .CostCol {
+    width: 45%;
+}
+
+.TableViewData .CostCol {
+    width: 45%;
+}
+
+.TableView.ServiceView .row {
+    margin: 0px;
+    padding: 0px;
+    font-size: 13.5px;
+}
+
+    .TableView.ServiceView .row .col-md-6.col-lg-6, .TableView .ServiceView .row .col-md-6.col-lg-6 {
+        margin: 0px;
+        padding: 0px;
+    }
+
+.TableView.ServiceView .TableViewHeader .row .col-md-6.col-lg-6 {
+    padding: 10px 7px;
+    text-transform: uppercase;
+    background-color: #f9fcff;
+    font-weight: 500;
+    border-bottom: 1px solid #EAEAEA;
+    letter-spacing: .1px;
+    border-right: 1px solid #eaeaea;
+    font-size: 12px;
+}
+
+.TableView.ServiceView .TableViewData .col-md-6.col-lg-6 {
+    padding: 10px 7px;
+    text-transform: capitalize;
+    border-bottom: 1px solid #EAEAEA;
+    background-color: transparent;
+}
+
+.TableView.ServiceView .TableViewData .row .col-md-6.col-lg-6 {
+    border-right: 1px solid #eaeaea;
+}
+
+.TableView.ServiceView .TableViewData .row:nth-child(odd) {
+    background-color: #FAFAFA;
+}
+
+#ViewAvail .WeekDay {
+    text-align: center;
+}
+
+#ViewAvail .WeekTime {
+    text-align: center;
+}
+
+
+#DoctorStatus .btn.btn-default.active {
+    color: #FFF !important;
+}
+
+.LabelInputContainer {
+    padding: 15px 15px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+    .LabelInputContainer .FormLabel {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+.DischargeRow .row {
+    margin: 0px;
+}
+
+    .DischargeRow .row [class*=' col-'] {
+        padding: 0px;
+    }
+
+.RowColumn .col-md-2.col-lg-2 {
+    width: 11.111%;
+}
+
+.RowColumn .row {
+    margin: 0px;
+}
+
+    .RowColumn.row .col-md-4 {
+        padding: 0px;
+    }
+
+.RowColumn {
+    border-bottom: 1px solid #F0F0F0;
+    padding-bottom: 20px;
+}
+
+    .RowColumn .LabelInputContainer {
+        border: none;
+        padding-bottom: 0px;
+    }
+
+        .RowColumn .LabelInputContainer input {
+        }
+
+.CheckBoxList label {
+    margin-right: 3%;
+}
+
+.row.CheckBoxList .checkbox {
+    background-color: #FAFAFA;
+    padding: 10px 10px;
+    padding-right: 0px;
+    border: 1px solid #F0F0F0;
+}
+
+.DischargeSummary .PatientRow {
+    padding: 0px;
+}
+
+.PatientIcon {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 18px;
+}
+
+    .PatientIcon .fa {
+        font-size: 25px;
+        color: #007AFF;
+    }
+
+.PatientAttach {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    padding-top: 14px;
+    padding-left: 0px;
+    padding-right: 5px;
+}
+
+    .PatientAttach .infoLabel {
+        font-weight: 400;
+        padding: 0px;
+        line-height: 20px;
+        display: block;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 12px;
+        color: #ACACAC;
+    }
+
+    .PatientAttach .infoText {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 25px;
+        height: 25px;
+    }
+
+        .PatientAttach .infoText input {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 25px;
+            height: 25px;
+        }
+
+.DischargeSummary .PatientRow input[disabled]:hover, input[disabled]:focus {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    height: 25px;
+    color: #3c3c3c !important;
+    background-color: #FFF !important;
+}
+
+
+textarea {
+    resize: none;
+    outline: none;
+    white-space: pre-wrap;
+}
+
+.TableView {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    width: 100%;
+}
+.Consultant {
+    padding:10px 10px;
+}
+    .TableView.Consultant .row {
+        margin: 0px;
+        padding: 0px;
+        font-size: 13.5px;
+    }
+
+        .TableView.Consultant .row .CheckCol {
+            width: 15%;
+        }
+
+        .TableView.Consultant .row .col-md-3, .TableView .Consultant .row .col-lg-3 {
+            margin: 0px;
+            padding: 0px;
+            width: 33.333%;
+        }
+
+        .TableView.Consultant .row .CheckCol {
+            width: 10%;
+        }
+
+        .TableView.Consultant .row .LastCol {
+            width: 23.33%;
+        }
+
+
+    .TableView.Consultant .TableViewHeader .row .col-md-3.col-lg-3 {
+        padding: 10px 7px;
+        text-transform: uppercase;
+        background-color: #f9fcff;
+        font-weight: 500;
+        border-bottom: 1px solid #EAEAEA;
+        letter-spacing: .1px;
+        border-right: 1px solid #eaeaea;
+        font-size: 12px;
+    }
+
+
+    .TableView.Consultant .TableViewData .row .col-md-3.col-lg-3 {
+        padding: 10px 7px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #EAEAEA;
+        background-color: transparent;
+    }
+
+.IconColumns .fa {
+    font-size: 16px;
+}
+
+.fa.greenColor {
+    color: #2dcb73;
+}
+
+.fa.redColor {
+    color: #ff604f;
+}
+
+.Consultant .nomargin {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.inputheight input, .inputheight select {
+    margin: 0px;
+    line-height: 38px;
+    height: 38px;
+    width: 100%;
+    border: 1px solid #EAEAEA;
+}
+
+.Casesheet .PatientRow {
+    margin: 0px;
+    padding: 0px;
+    background-color: #FFF;
+    -webkit-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+}
+
+.TileDisplay .fa {
+    color:#FFF;
+}
+.TileDisplay .LabelTextTile {
+    font-size:20px;
+    font-weight:300;
+}
+.TileDisplay {
+    position:relative;
+    background-color:#FEFEFE;
+     -webkit-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    box-shadow: 0 1px 0px 0px rgba(0,0,0,.2);
+    padding:10px;
+    margin-bottom:20px;
+}
+.TileLabel {
+    display:block;
+    width:100%;
+    font-size:14px;
+    color:#9c9c9c;
+}
+.TileGroupBox {
+    position:absolute;
+    padding-top:5px;
+    margin-left:10px;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+cursor: not-allowed;
+background-color: #FFF;
+opacity: 1;
+border: none;
+}
+.help-block {
+display: block;
+ margin-top: 0px; 
+ margin-bottom: 0px; 
+color: #737373;
+}

@@ -1,0 +1,1172 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--Stylesheets Plugin-->
+
+   <!--<link href="css/element.css" rel="stylesheet" />-->
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+    
+    
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+    
+
+    <!--<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/src/js/bootstrap-datetimepicker.js"></script>-->
+
+   
+    <script>
+        var month = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+		var openDetails = [] ;
+		var closeDetails = [] ;
+		$('form.apptForm').submit(function () {
+        if ($('.FormField').hasClass('has-error')) {
+            //alert('Has Error in page');
+           return false
+        }
+        else {
+            addAppointment(1) ;
+			return false;
+        }
+        
+		});
+		$('form.admitForm').submit(function () {
+        if ($('.FormField').hasClass('has-error')) {
+            //alert('Has Error in page');
+           return false ;
+        }
+        else {
+            addAppointment(2) ;
+			return false;
+        }
+        
+		});
+        function fillDetails() {
+            var id = window.location.href;
+            try {
+                id = unescape(id.substring(id.lastIndexOf('?') + 9));
+				var patient = JSON.parse(id);
+                var d = new Date(patient.dateOfBirth);
+                document.getElementById("name").value = patient.name;
+                document.getElementById("dob").value = ('0' + d.getDate()).slice(-2) + '-' + month[d.getMonth()] + '-' + d.getFullYear();
+                document.getElementById("MobileNumber").value = patient.contactNo;
+                document.getElementById("patient_Id").value = patient.nbr;
+                getData("1012", patient.id);
+                getData("1013", patient.id);
+                
+            }
+            catch (e) { }
+
+
+        }
+        function getElem(id) {
+            return document.getElementById(id);
+        }
+        function loadPatient() {
+            var id = window.location.href;
+            try {
+                id = unescape(id.substring(id.lastIndexOf('?') + 9));
+                window.location.href = '1000.html?jsonVal=' + escape(id);
+            }
+            catch (e) { }
+
+        }
+        function addAppt() {
+            var id = window.location.href;
+            try {
+                id = unescape(id.substring(id.lastIndexOf('?') + 9));
+                window.location.href = '3010.html?jsonVal=' + escape(id);
+            }
+            catch (e) { }
+        }
+        function billAppt() {
+            var jsonval = {};
+            var apptNbrOpen = 1;
+            jsonval.patientNbr = document.getElementById('patient_Id').value;
+            jsonval.name = document.getElementById('name').value;
+            jsonval.apptNbr = document.getElementById('apptNbrOpen').value;
+
+            try {
+                window.location.href = '4000.html?jsonVal=' + escape(JSON.stringify(jsonval));
+            }
+            catch (e) { }
+        }
+        function submitData() {
+            var xmlhttp;
+            var jsonData = {};
+            jsonData.patientId = getElem("patientId").value;
+            jsonData.date = getElem("date").value;
+            docIndex = getElem("doctor").selectedIndex;
+            jsonData.docName = getElem("doctor").options[docIndex].value;
+            jsonData.pov = getElem("pov").value;
+            try {
+                tmpdate = new Date(jsonData.date);
+            }
+            catch (e) {
+                alert("Please provide a valid date. (YYYY/MM/DD)");
+                return;
+            }
+            if (docIndex == 0) {
+                alert("Please choose a doctor for appointment");
+                return;
+            }
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {	// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    resp = JSON.parse(xmlhttp.responseText);
+                    if (resp.error) {
+                        getElem("contentDiv").innerHTML = '<div style="padding:20px">' + "Error creating appointment.\n\n" + resp.reason + '<div>';
+                    }
+                    else {
+                        getElem("contentDiv").innerHTML = '<div style="padding:20px">' + resp.success + '<div>';
+                    }
+                }
+            }
+            xmlhttp.open("GET", "1004.html?jsonData=" + escape(JSON.stringify(jsonData)), true);
+            xmlhttp.send();
+        }
+		function getAge(birthDate) {
+			var today = new Date();
+			var nowyear = today.getFullYear();
+			var nowmonth = today.getMonth();
+			var nowday = today.getDate();
+			
+			var birth = new Date (birthDate) ;
+			var birthyear = birth.getFullYear();
+			var birthmonth = birth.getMonth();
+			var birthday = birth.getDate();
+		 
+			var age = nowyear - birthyear;
+			var age_month = nowmonth - birthmonth;
+			var age_day = nowday - birthday;
+			
+			if(age_month < 0 || (age_month == 0 && age_day <0)) {
+					age = parseInt(age) -1;
+				}
+			return age;
+		}
+		function iconFunc(type,index,closeType)
+		{
+			var id = window.location.href;
+            try {
+                id = unescape(id.substring(id.lastIndexOf('?') + 9));
+				var patient = JSON.parse(id);
+				var jsonObj = {};
+				switch(type)
+				{
+					case 1://Case Sheet submit
+						jsonObj.name = patient.name ;
+						jsonObj.age = ''+getAge (patient.dateOfBirth) ;
+						jsonObj.gender = patient.gender ;
+						jsonObj.city = patient.city ;
+						jsonObj.addressLine1 = patient.addressLine1 ;
+						jsonObj.addressLine2 = patient.addressLine2 ;
+						jsonObj.contactNo = patient.contactNo ;
+						jsonObj.patientNbr = 'IP'+patient.nbr ;
+						if(closeType==1)
+						{
+							jsonObj.apptNbr = openDetails[index].nbr ;
+							jsonObj.apptDate = openDetails[index].date ;
+						}
+						else
+						{
+							jsonObj.apptNbr = closeDetails[index].nbr ;
+							jsonObj.apptDate = closeDetails[index].date ;
+						}
+						window.location.href = '6000.html?jsonVal=' + escape(JSON.stringify(jsonObj));
+						break ;
+					case 2://Case Sheet print
+						break ;
+					case 3://discharge summary submit
+						jsonObj.name = patient.name ;
+						jsonObj.age = ''+getAge (patient.dateOfBirth) ;
+						jsonObj.gender = patient.gender ;
+						jsonObj.contactNo = patient.contactNo ;
+						jsonObj.patientNbr = 'IP'+patient.nbr ;
+						if(closeType==1)
+						{
+							jsonObj.apptNbr = openDetails[index].nbr ;
+							jsonObj.apptDate = openDetails[index].date ;
+						}
+						else
+						{
+							jsonObj.apptNbr = closeDetails[index].nbr ;
+							jsonObj.apptDate = closeDetails[index].date ;
+						}
+						window.location.href = '5000.html?jsonVal=' + escape(JSON.stringify(jsonObj));
+						break ;
+					case 4://discharge summary print
+						break ;
+					case 5://bill submit 
+						jsonObj.name = patient.name ;
+						jsonObj.age = ''+getAge (patient.dateOfBirth) ;
+						jsonObj.gender = patient.gender ;
+						jsonObj.city = patient.city ;
+						jsonObj.contactNo = patient.contactNo ;
+						jsonObj.patientNbr = 'IP'+patient.nbr ;
+						if(closeType==1)
+						{
+							jsonObj.apptNbr = openDetails[index].nbr ;
+							jsonObj.apptDate = openDetails[index].date ;
+						}
+						else
+						{
+							jsonObj.apptNbr = closeDetails[index].nbr ;
+							jsonObj.apptDate = closeDetails[index].date ;
+						}
+						window.location.href = '4000.html?jsonVal=' + escape(JSON.stringify(jsonObj));
+						break ;
+					case 6://bill print
+						break ;
+					case 7://token print
+						break ;
+					case 8://advance print
+						break ;
+					}
+				}
+            catch (e) { }
+			
+		}
+		function dynamicicons (parent,type,index,closeType)
+		{
+			var obj = document.createElement ( 'span' ) ;
+			var obj2 = document.createElement ( 'i' ) ;
+			var obj3 = document.createElement ( 'i' ) ;
+			obj.setAttribute('class','fa-stack fa-2x') ;
+			obj.setAttribute("onclick","iconFunc("+type+","+index+","+closeType+")") ;
+			obj2.setAttribute('class','fa fa-square fa-stack-2x') ;
+			obj.appendChild(obj2) ;
+			switch(type)
+			{
+				case 1://Case Sheet submit
+					obj3.setAttribute("class","fa fa-file-text fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Case Sheet");
+					break ;
+				case 2://Case sheet print
+					obj3.setAttribute("class","fa fa-file-text fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Print Case Sheet");
+					break ;
+				case 3://discharge summary submit
+					obj3.setAttribute("class","fa fa-heartbeat fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Discharge Summary");
+					break ;
+				case 4://discharge summary print
+					obj3.setAttribute("class","fa fa-heartbeat fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Print Discharge Summary");
+					break ;
+				case 5://submit bill
+					obj3.setAttribute("class","fa fa-credit-card fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Generate Bill");
+					break ;
+				case 6://print bill
+					obj3.setAttribute("class","fa fa-credit-card fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Print Bill");
+					break ;
+				case 7://print token
+					obj3.setAttribute("class","fa fa-print fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Print Token");
+					break ;
+				case 8://print advance receipt
+					obj3.setAttribute("class","fa fa-print fa-stack-1x fa-inverse");
+					obj3.setAttribute ("data-toggle","tooltip") ;
+					obj3.setAttribute("data-placement","top");
+					obj3.setAttribute("title","Print Receipt");
+					break;
+			}
+			
+			obj.appendChild ( obj3) ;
+			parent.appendChild(obj) ;
+		}
+		function showIcns ( flag , type , i , closeType , obj )
+		{
+			if ($(obj).hasClass('collapsed')||flag)
+			{					
+				if ( closeType == 1 )// Open appointment/admission
+				{
+					var obj1 = document.getElementById('openRightIcons'); 
+					var x=obj1.childNodes;
+					for (j=0;j<x.length;j++)
+					{
+						if (x[j].tagName=='SPAN')
+						{
+							x[j].parentNode.removeChild(x[j]) ;
+							j-- ;
+						}
+					}
+					dynamicicons (obj1,5,i,closeType) ;
+					if ( type == 1 )//Appointment
+					{
+						var d = new Date() ;
+						d1 = d.getTime() + (24*60*60*1000) ;
+						d = d.getTime();
+						var apptDate = new Date ( openDetails[i].date ) ;
+						apptDate = apptDate.getTime() ;
+						if (apptDate>=d && apptDate<=d1)// Token can be printed only on the date of appointment
+							dynamicicons (obj1,7,i) ; 
+						
+					}
+					else
+					{
+						if ( openDetails[i].caseNbr )// If case sheet number exists then case sheet print option to be provided
+							dynamicicons (obj1,2,i,closeType) ;
+						else
+							dynamicicons (obj1,1,i,closeType) ;	
+						if ( openDetails[i].smryNbr )// If case sheet number exists then case sheet print option to be provided
+							dynamicicons (obj1,4,i,closeType) ;
+						else
+							dynamicicons (obj1,3,i,closeType) ;
+						if ( openDetails[i].advance )
+							dynamicicons (obj1,8,i,closeType) ;
+					}		
+				}
+				else
+				{
+					var obj1 = document.getElementById('closeRightIcons'); 
+					var x=obj1.childNodes;
+					for (j=0;j<x.length;j++)
+					{
+						if (x[j].tagName=='SPAN')
+						{
+							x[j].parentNode.removeChild(x[j]) ;
+							j-- ;
+						}
+					}
+					dynamicicons (obj1,6,i,closeType) ;
+					if ( type != 1 )//Appointment
+					{
+						if ( openDetails[i].caseNbr )// If case sheet number exists then case sheet print option to be provided
+							dynamicicons (obj1,2,i,closeType) ;
+						else
+							dynamicicons (obj1,1,i,closeType) ;	
+						if ( openDetails[i].smryNbr )// If case sheet number exists then case sheet print option to be provided
+							dynamicicons (obj1,4,i,closeType) ;
+						else
+							dynamicicons (obj1,3,i,closeType) ;
+						if ( openDetails[i].advance )
+							dynamicicons (obj1,8,i,closeType) ;
+					}	
+				}
+			}
+			else
+			{
+				if ( closeType == 1 )// Open appointment/admission
+					obj1 = document.getElementById('openRightIcons'); 
+				else	
+					obj1 = document.getElementById('closeRightIcons'); 
+				var x=obj1.childNodes;
+				for (j=0;j<x.length;j++)
+				{
+					if (x[j].tagName=='SPAN')
+					{
+						x[j].parentNode.removeChild(x[j]) ;
+						j-- ;
+					}
+				}
+			}
+		}
+        function createApptHeader(type, index, nbr , closeType) {
+            var outDiv = document.createElement("div");
+			if ( !index )
+				outDiv.setAttribute('class', 'InfoHeader');
+			else
+				outDiv.setAttribute('class', 'InfoHeader collapsed');
+            outDiv.setAttribute('data-toggle', 'collapse');
+            outDiv.setAttribute('aria-expanded', 'false');
+			outDiv.setAttribute('onclick','showIcns(0,'+type+','+index+','+closeType+',this)') ;
+            if (closeType == 1) {
+				outDiv.setAttribute('data-parent', '#OpenApptContainer');
+                outDiv.setAttribute('data-target', '#CollapseOpenAppointment' + (index + 1));
+                //outDiv.setAttribute('aria-controls', 'CollapseOpenAppointment' + (index + 1));
+            }
+            else {
+				outDiv.setAttribute('data-parent', '#CloseApptContainer');
+                outDiv.setAttribute('data-target', '#CollapseCloseAppointment' + (index + 1));
+                //outDiv.setAttribute('aria-controls', 'CollapseCloseAppointment' + (index + 1));
+            }
+            var headerDiv = document.createElement("h5");
+            if (type == 1)//Appointment
+                headerDiv.innerHTML = '<span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-key fa-stack-1x fa-inverse"></i></span><span class="InfoHeaderLabel">Appointment Number</span><span id="OpenAppointmentNbr' + index + '">' + nbr + '</span><span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span><span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>';
+            else//Admission
+                headerDiv.innerHTML = '<span class="fa-stack fa-lg"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-key fa-stack-1x fa-inverse"></i></span><span class="InfoHeaderLabel">Admission Number</span><span id="OpenAppointmentNbr' + index + '">' + nbr + '</span><span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span><span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>';
+            outDiv.appendChild(headerDiv);
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+            return outDiv;
+        }
+        function createApptDataDiv(type, index, text) {
+            /*
+				type values
+				-----------
+				1. Date
+				2. Time
+				3. Physician
+				4. Purpose of Visit
+				5. Contact person
+				6. Contact number
+				7. relation
+			*/
+            var outDiv = document.createElement("div");
+            var rowDataPic = document.createElement("i");
+            var rowLabel = document.createElement("span");
+            var rowText = document.createElement("span");
+            rowLabel.setAttribute('class', 'infoLabel');
+            rowText.setAttribute('class', 'infoText');
+            rowText.innerText = text;
+            switch (type) {
+                case 1:
+                    rowDataPic.setAttribute('class', 'fa fa-calendar');
+                    rowLabel.innerText = 'Date';
+                    rowText.setAttribute('id', 'OpenApptDate' + index);
+                    break;
+                case 2:
+                    rowDataPic.setAttribute('class', 'fa fa-clock-o');
+                    rowLabel.innerText = 'Time';
+                    rowText.setAttribute('id', 'OpenApptTime' + index);
+                    break;
+                case 3:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Physician';
+                    rowText.setAttribute('id', 'OpenApptDoc' + index);
+                    break;
+                case 4:
+                    rowDataPic.setAttribute('class', 'fa fa-ambulance');
+                    rowLabel.innerText = 'Purpose of visit';
+                    rowText.setAttribute('id', 'OpenApptPov' + index);
+                    break;
+                case 5:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Admitted by';
+                    rowText.setAttribute('id', 'OpenApptName' + index);
+                    break;
+                case 6:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Contact No.';
+                    rowText.setAttribute('id', 'OpenApptContact' + index);
+                    break;
+                case 7:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Relationship';
+                    rowText.setAttribute('id', 'OpenApptRelation' + index);
+                    break;
+				case 8:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Surgery Date';
+                    rowText.setAttribute('id', 'OpenApptSurgery' + index);
+                    break;
+				case 9:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Discharge Date';
+                    rowText.setAttribute('id', 'OpenApptDispatch' + index);
+                    break;
+                default:
+                    rowDataPic.setAttribute('class', 'fa fa-user-md');
+                    rowLabel.innerText = 'Admitted by';
+                    rowText.setAttribute('id', 'OpenApptName' + index);
+                    break;
+            }
+            outDiv.setAttribute('class', 'infoRow');
+            outDiv.appendChild(rowDataPic);
+            outDiv.appendChild(rowLabel);
+            outDiv.appendChild(rowText);
+            return outDiv;
+        }
+		function loadVisitDetails ( type , data )
+		{
+			var apptDet = JSON.parse(data);
+			for (i = 0 ; i < apptDet.rows.length ; i++)
+			{
+				var obj = {} ;
+				obj.nbr = apptDet.rows[i].value.nbr ;
+				obj.date = apptDet.rows[i].value.date ;
+				obj.type = apptDet.rows[i].value.type ;
+				obj.pov = apptDet.rows[i].value.pov ;
+				if ( apptDet.rows[i].value.docName) 
+					obj.docName = apptDet.rows[i].value.docName ;
+				obj.contactPerson = apptDet.rows[i].value.contactPerson ;
+				obj.contactNo = apptDet.rows[i].value.contactNo ;
+				obj.relation = apptDet.rows[i].value.relation ;
+				if ( apptDet.rows[i].value.surgeryDate )
+					obj.surgeryDate = apptDet.rows[i].value.surgeryDate ;
+				if ( apptDet.rows[i].value.dischargeDate )	
+					obj.dischargeDate = apptDet.rows[i].value.dischargeDate ;
+				if ( apptDet.rows[i].value.billNbr )		
+					obj.billNbr = apptDet.rows[i].value.billNbr ;
+				if ( apptDet.rows[i].value.caseNbr )	
+					obj.caseNbr = apptDet.rows[i].value.caseNbr ;
+				if ( apptDet.rows[i].value.smryNbr )	
+					obj.smryNbr = apptDet.rows[i].value.smryNbr ;
+				if ( apptDet.rows[i].value.advance )	
+					obj.advance = apptDet.rows[i].value.advance ;
+				if ( type == 1 )
+					openDetails.push ( obj ) ;
+				else
+					closeDetails.push ( obj ) ;
+			}
+			if ( type == 1 )
+				fillApptDetails(type, openDetails) ;
+			else
+				fillApptDetails(type, closeDetails) ;
+		}
+        function fillApptDetails(type, data) {
+            var apptDiv = {};
+            if (type == 1) {
+                apptDiv = document.getElementById('OpenApptContainer');
+                if (!data.length) {
+					apptDiv.setAttribute ( 'style' , 'padding:15px;height:30px;' ) ;
+                    apptDiv.innerText = "No. pending appointments exists";
+                    return;
+                }
+            }
+            else {
+                apptDiv = document.getElementById('CloseApptContainer');
+                if (!data.length) {
+					apptDiv.setAttribute ( 'style' , 'padding:15px;height:30px;' ) ;
+                    apptDiv.innerText = "No. closed appointments exists";
+                    return;
+                }
+            }
+            for (i = 0 ; i < data.length ; i++) {
+                var outDiv = document.createElement("div");
+                outDiv.setAttribute('class', 'InfoContainer panel');
+                if ( data[i].type == 'OUT')
+                    headerDiv = createApptHeader(1, i, data[i].nbr , type );
+                else
+                    headerDiv = createApptHeader(2, i, data[i].nbr , type );
+                outDiv.appendChild(headerDiv);
+                var innerContainer = document.createElement("div");
+                if ( type == 1 )
+                    innerContainer.setAttribute('id', 'CollapseOpenAppointment' + (i + 1));
+                else
+                    innerContainer.setAttribute('id', 'CollapseCloseAppointment' + (i + 1));
+				if ( !i )
+					innerContainer.setAttribute('class', 'collapse panel-collapse in');
+				else
+					innerContainer.setAttribute('class', 'collapse');
+                if (data[i].date) {
+                    var d = new Date(data[i].date);
+                    var ddate = ('0' + d.getDate()).slice(-2) + '-' + month[d.getMonth()] + '-' + d.getFullYear();
+                    var dtime = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+                    var datDiv = createApptDataDiv(1, i, ddate);
+                    var timeDiv = createApptDataDiv(2, i, dtime);
+                    innerContainer.appendChild(datDiv);
+                    innerContainer.appendChild(timeDiv);
+                }
+                if (data[i].docName) {
+                    var docDiv = createApptDataDiv(3, i, data[i].docName);
+                    innerContainer.appendChild(docDiv);
+                }
+                if (data[i].pov) {
+                    var povDiv = createApptDataDiv(4, i, data[i].pov);
+                    innerContainer.appendChild(povDiv);
+                }
+                if (data[i].contactPerson) {
+					var nameDiv = createApptDataDiv(5, i, data[i].contactPerson);
+                    innerContainer.appendChild(nameDiv);
+                }
+                if (data[i].contactNo) {
+                    var contactDiv = createApptDataDiv(6, i, data[i].contactNo);
+                    innerContainer.appendChild(contactDiv);
+                }
+                if (data[i].relation) {
+                    var relationDiv = createApptDataDiv(7, i, data[i].relation);
+                    innerContainer.appendChild(relationDiv);
+                }
+				if (data[i].surgeryDate) {
+					var d1 = new Date(data[i].surgeryDate);
+					var ddate1 = ('0' + d1.getDate()).slice(-2) + '-' + month[d1.getMonth()] + '-' + d1.getFullYear();
+                    var relationDiv = createApptDataDiv(8, i, ddate1);
+                    innerContainer.appendChild(relationDiv);
+                }
+				if (data[i].dischargeDate) {
+					var d1 = new Date(data[i].dischargeDate);
+					var ddate1 = ('0' + d1.getDate()).slice(-2) + '-' + month[d1.getMonth()] + '-' + d1.getFullYear();
+                    var relationDiv = createApptDataDiv(9, i, ddate1);
+                    innerContainer.appendChild(relationDiv);
+                }
+                outDiv.appendChild(innerContainer);
+                apptDiv.appendChild(outDiv);
+            }
+			if (data[0].type == 'OUT')
+				showIcns (  1 , 1 , 0 , type , (type==1)?document.getElementById('openRightIcons'):document.getElementById('closeRightIcons')   )
+			else
+				showIcns (  1 , 2 , 0 , type , (type==1)?document.getElementById('openRightIcons'):document.getElementById('closeRightIcons') )
+        }
+		
+        function getData(url, data) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {	// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    resp = JSON.parse(xmlhttp.responseText);
+                    if (resp.error) {
+                        alert("Internal error");
+                        return;
+                    }
+                    switch (parseInt(url)) {
+                        case 1012:
+                            loadVisitDetails(1, xmlhttp.responseText);
+                            break;
+                        case 1013:
+                            loadVisitDetails(2, xmlhttp.responseText);
+                            break;
+                    }
+                }
+            }
+            xmlhttp.open("GET", url + ".html?searchVal=" + escape(data), true);
+            xmlhttp.send();
+        }
+	function submitAppt(jsonData,type)
+	{
+		var xmlhttp;
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {	// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+			{
+				resp = JSON.parse(xmlhttp.responseText);
+				if (resp.error) 
+				{
+					parent.myAlert ((type==1)?"Error creating appointment.\n\n":"Error creating admission.\n\n" + resp.reason );
+				}	
+				else 
+				{
+					parent.myAlert ( resp.success );
+					if ( type == 1 )
+						document.getElementById ('formAppt').reset() ;		
+					else 	
+						document.getElementById ('formAdm').reset() ;		
+				}	
+			}
+        }
+		xmlhttp.open("GET", "1004.html?jsonData=" + escape(JSON.stringify(jsonData)), true);
+		xmlhttp.send();
+	}
+	function addAppointment(type)
+	{
+		//type = 1 for appointment and type = 2 for admission
+		var dateVal = '' , timeVal = '' , docNameObj = {} , docName = '' , pov = '' , contact = '' , contactNo = '' , relation = '' ;
+		if ( type == 1 )	
+		{
+			dateVal = document.getElementById ('AddApptFormDate').value ;
+			timeVal = document.getElementById ('AddApptFormTime').value ;	
+			docNameObj = document.getElementById ('docNameSelect') ;	
+			docName = docNameObj.options[docNameObj.selectedIndex].text ;
+			pov = document.getElementById ('FormAddAppPurpVist').value ;
+		}	
+		else 
+		{
+			dateVal = document.getElementById ('AddAdmFormDate').value ;
+			timeVal = document.getElementById ('AddAdmFormTime').value ;	
+			pov = document.getElementById ('FormAddAdmPurpVist').value ;
+			contact = document.getElementById ('FormAddAdmAdmit').value ;
+			contactNo = document.getElementById ('FormAddAdmContact').value ;
+			relation = document.getElementById ('FormAddAdmRelation').value ;
+		}
+		var d1 = '' ;
+		if (dateVal=='')
+			return false ;
+		if (timeVal=='')
+			return false ;
+		if (pov=='')
+			return false ;
+		if ( type == 2 )	
+		{
+			if (contact=='')
+				return false ;
+			if (contactNo=='')
+				return false ;
+			if (relation=='')
+				return false ;
+		}		
+		try {
+			d1 = new Date ( dateVal +' '+timeVal) ;
+		}	
+		catch (e){return false ;}
+		var id = window.location.href;
+        try {
+            id = unescape(id.substring(id.lastIndexOf('?') + 9));
+            patient = JSON.parse(id);
+		}
+		catch(e){return false;}		
+		var jsonData = {} ;
+		jsonData.date = d1.getFullYear() + '/' + ('0' + (d1.getMonth() + 1)).slice(-2) + '/' + ('0' + d1.getDate()).slice(-2) +' '+('0' + d1.getHours()).slice(-2) + ':' + ('0' + d1.getMinutes()).slice(-2)+ ':' +('0' + d1.getSeconds()).slice(-2); ;
+		jsonData.patientId = patient.id ;
+		if ( type == 1 )
+			jsonData.type = 'OUT' ;
+		else 	
+			jsonData.type = 'IN' ;	
+		if ( docName != '' )
+			jsonData.docName = 	docName ;
+		jsonData.pov = pov ;
+		if ( contact != '' )
+			jsonData.contactPerson = contact ;
+		if ( contactNo != '' )
+			jsonData.contactNo = contactNo ;
+		if ( relation != '' )
+			jsonData.relation = relation ;	
+		submitAppt (jsonData,type) ;
+		return false ;
+	}
+
+    </script>
+</head>
+<body class="innerBody" onload="fillDetails()">
+    <div class="PatientRow">
+        <div class="infoRow">
+            <i class="fa fa-user"></i>
+            <span class="infoLabel">Patient Name</span>
+            <span class="infoText"><input class="HideTextbox" id="name" placeholder="Patient Name" type='text' disabled /></span>
+        </div>
+    </div>
+    <div class="PatientRow">
+        <div class="infoRow  ">
+            <i class="fa fa-key"></i>
+            <span class="infoLabel">Patient Number</span>
+            <span class="infoText"><input class="HideTextbox" id="patient_Id" placeholder="Patient Name" type='text' disabled /></span>
+        </div>
+    </div>
+    <div class="PatientRow">
+        <div class="infoRow  ">
+            <i class="fa fa-calendar"></i>
+            <span class="infoLabel">Date Of Birth</span>
+            <span class="infoText"><input class="HideTextbox" id="dob" placeholder="Patient Name" type='text' disabled /></span>
+        </div>
+    </div>
+    <div class="PatientRow">
+        <div class="infoRow  ">
+            <i class="fa fa-phone"></i>
+            <span class="infoLabel">Mobile Number</span>
+            <span class="infoText"><input class="HideTextbox" id="MobileNumber" placeholder="Patient Number" type='text' disabled /></span>
+            <!--<input class="btn btn-success " type='button' value='Edit'>-->
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-sm-12 col-md-12 col-lg-12">
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs AppointmentTab ">
+                    <li>
+                        <a class="firstTab" href="#OpenAppointment" data-toggle="collapse" aria-expanded="false" aria-controls="OpenAppointment">
+                            <div class="TabHeaderPanel panel panel-white no-radius text-center">
+                                <div class="panel-body">
+                                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-eye fa-stack-1x fa-inverse"></i></span>
+                                    <h2 class="StepTitle">Open Visits</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#CloseAppointment" data-toggle="collapse" aria-expanded="false" aria-controls="CloseAppointment">
+                            <div class="TabHeaderPanel panel panel-white no-radius text-center">
+                                <div class="panel-body">
+                                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-eye-slash fa-stack-1x fa-inverse"></i></span>
+                                    <h2 class="StepTitle">Closed Visits</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#AddAppointment" data-toggle="collapse" aria-expanded="false" aria-controls="AddAppointment">
+                            <div class="TabHeaderPanel panel panel-white no-radius text-center">
+                                <div class="panel-body">
+                                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-wheelchair fa-stack-1x fa-inverse"></i></span>
+                                    <h2 class="StepTitle">Add Appointment</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#AddAdmission" data-toggle="collapse" aria-expanded="false" aria-controls="AddAdmission">
+                            <div class="TabHeaderPanel panel panel-white no-radius text-center">
+                                <div class="panel-body">
+                                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-bed fa-stack-1x fa-inverse"></i></span>
+                                    <h2 class="StepTitle">Add Admission</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 CollapsecolMargin">
+                        <div class="panel panel-white no-radius">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Open Visits</h4>
+                                <div id='openRightIcons' class="RightIcons">
+                                    <div id='apptButCont' style='display:none' class="button_container">
+                                        <input class="btn btn-success button_formedit" onclick="billAppt()" type='button' value='Bill Appointment'>
+                                        <input class="btn btn-success button_formedit" type='button' value='Print token'>
+                                        <!-- <input class="btn btn-default button_formreset" type='reset' value='Reset'   > -->
+                                    </div>
+                                    
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="panel-wrapper collapse in " id="OpenAppointment">
+                                <div id='OpenApptContainer' class="panel-group">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white no-radius" id="Div1">
+                            <div class="panel-heading border-light">
+                                <h4 class="panel-title">Closed Visits</h4>
+								<div id='closeRightIcons' class="RightIcons">
+
+                                </div>
+		
+                            </div>
+                            <div class="panel-wrapper collapse in" id="CloseAppointment">
+                                <div id='CloseApptContainer' class="panel-group">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel panel-white no-radius">
+                            <form class='apptForm' id="formAppt" method="post" action="" onsubmit="return addAppointment(1);" >
+                                <div class="panel-heading border-light">
+                                    <h4 class="panel-title">Add Appointment</h4>
+                                    <div class="RightIcons">
+                                        <button class="noButtons" type="submit"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-floppy-o fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Save"></i></span></button>
+                                        <button class="noButtons" type="reset"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-refresh fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Reset"></i></span></button>
+                                        <!--<input class="" type='submit' value='Save'>
+                                        <input class="" type='reset' value='Reset'>-->
+                                    </div>
+                                </div>
+
+                                <div class="panel-wrapper collapse in" id="AddAppointment">
+                                    <div class="panel-body">
+                                        <div class="InfoContainer">
+                                            <div class="InfoHeader" data-toggle="collapse" data-target="#CollapseAddAppointment" aria-expanded="false" aria-controls="CollapseAddAppointment">
+                                                <h5>
+                                                    <span class="fa-stack fa-lg">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-info-circle fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                    <span class="InfoHeaderLabel">Please provide details to Add Appointment</span>
+                                                    <span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span>
+                                                    <span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>
+                                                </h5>
+                                            </div>
+                                            <div id="CollapseAddAppointment" class="collapse in">
+
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <div class="infoLabel">Date</div>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="hidden" id="dtp_input2" value="" />
+                                                                <div class="input-group date" id="AddAptDatePicker">
+                                                                    <input type="text" name="AddApptDate" class="form-control" id="AddApptFormDate" autocomplete="off"
+                                                                           placeholder="Enter Date" data-validation="required" data-validation-error-msg=" " data-validation-format="dd/mm/yyyy">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <!--<input type="text" autocomplete="off" name="Date" class="form-control" id="FormAddAppDate" placeholder="Choose Date" data-validation="required" data-validation-error-msg=" "></div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <div class="infoLabel">Time</div>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <div class="input-group date" id="AddAptTimePicker">
+                                                                    <input type="text" class="form-control" autocomplete="off" name="AddApptTime" id="AddApptFormTime" placeholder="Enter Date" data-validation="required" data-validation-error-msg=" ">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <!--<input type="text" autocomplete="off" name="Date" class="form-control" id="FormAddAppDate" placeholder="Choose Date" data-validation="required" data-validation-error-msg=" "></div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-user-md"></i>
+                                                            <span class="infoLabel">Physician</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <select id='docNameSelect' name="AddApptDoctor" data-validation="required" data-validation-error-msg=" ">
+
+                                                                    <option>Dr.Jagan</option>
+                                                                    <option>Dr.Naveen</option>
+                                                                    <option>Dr.Kiran</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-ambulance"></i>
+                                                            <span class="infoLabel">Purpose of visit</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="text" autocomplete="off" name="PurposeOfVisit" class="form-control" id="FormAddAppPurpVist" placeholder="Enter Purpose of Visit" data-validation="required" data-validation-error-msg=" " />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <input type="hidden" name="itcsdata" value="" id="itcsdata">
+                            </form>
+                        </div>
+                        <div class="panel panel-white no-radius">
+                            <form method="post" class='admitForm' id="formAdm" action="" onsubmit="return addAppointment(2);">
+                                <div class="panel-heading border-light">
+                                    <h4 class="panel-title">Add Admission</h4>
+                                    <div class="RightIcons">
+                                        <button class="noButtons" type="submit"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-floppy-o fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Save"></i></span></button>
+                                        <button class="noButtons" type="reset"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-refresh fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Reset"></i></span></button>
+                                        <!--<input class="" type='submit' value='Save'>
+                                        <input class="" type='reset' value='Reset'>-->
+                                    </div>
+                                </div>
+                                <div class="panel-wrapper collapse in" id="AddAdmission">
+                                    <div class="panel-body">
+                                        <div class="InfoContainer">
+                                            <div class="InfoHeader" data-toggle="collapse" data-target="#CollapseAddAdmission" aria-expanded="false" aria-controls="CollapseAddAdmission">
+                                                <h5>
+                                                    <span class="fa-stack fa-lg">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-info-circle fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                    <span class="InfoHeaderLabel">Please provide details to Add Admission</span>
+                                                    <span class="coll_icon coll_plus"><i class="fa fa-plus-circle"></i></span>
+                                                    <span class="coll_icon coll_minus"><i class="fa fa-minus-circle"></i></span>
+                                                </h5>
+                                            </div>
+                                            <div id="CollapseAddAdmission" class="collapse in">
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-calendar"></i>
+                                                            <div class="infoLabel">Date</div>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <div class="input-group date" id="AddAdmDatePicker">
+                                                                    <input type="text" name="AddAdmDate" class="form-control" id="AddAdmFormDate" autocomplete="off"
+                                                                           placeholder="Enter Date" data-validation="required" data-validation-error-msg=" " data-validation-format="dd/mm/yyyy">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <!--<input type="text" autocomplete="off" name="Date" class="form-control" id="FormAddAppDate" placeholder="Choose Date" data-validation="required" data-validation-error-msg=" "></div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <div class="infoLabel">Time</div>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <div class="input-group date " id="AddAdmTimePicker">
+                                                                    <input type="text" class="form-control" autocomplete="off" name="AddAdmTime" id="AddAdmFormTime" placeholder="Enter Date" data-validation="required" data-validation-error-msg=" ">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-clock-o"></span>
+                                                                    </span>
+                                                                </div>
+                                                                <!--<input type="text" autocomplete="off" name="Date" class="form-control" id="FormAddAppDate" placeholder="Choose Date" data-validation="required" data-validation-error-msg=" "></div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+												<div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-ambulance"></i>
+                                                            <span class="infoLabel">Purpose of visit</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="text" autocomplete="off" name="PurposeOfVisit" class="form-control" id="FormAddAdmPurpVist" placeholder="Enter Purpose of Visit" data-validation="required" data-validation-error-msg=" " />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-user"></i>
+                                                            <span class="infoLabel">Admitted By</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="text" autocomplete="off" name="AdmittedBy" class="form-control" id="FormAddAdmAdmit" placeholder="Enter Admitted By" data-validation="required" data-validation-error-msg=" ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-phone"></i>
+                                                            <span class="infoLabel">Contact Number</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="text" autocomplete="off" data-validation="custom" name="AddAdmContact" class="form-control" id="FormAddAdmContact" placeholder="Enter Contact Number" data-validation="required" data-validation-error-msg=" " data-validation-regexp="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="infoRow DatePicker_Row">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-lg-4">
+                                                            <i class="fa fa-street-view"></i>
+                                                            <span class="infoLabel">Relationship</span>
+                                                        </div>
+                                                        <div class="col-md-8 col-lg-8">
+                                                            <div class="infoTextbox FormField ">
+                                                                <input type="text" autocomplete="off" name="AddAdmRelation" class="form-control" id="FormAddAdmRelation" placeholder="Enter Relationship" data-validation="required" data-validation-error-msg=" " />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.loadJSON.js"></script>
+    <script src="js/vendor/jquery.form-validator.min.js"></script>
+    <script src="js/commonScript.js"></script>
+    <script>
+        $.validate();
+        $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+    </script>
+    <script type="text/javascript">
+		d = new Date() ;
+		$('#AddAptDatePicker').datetimepicker({
+            format: 'MM/DD/YYYY',
+			minDate : d 
+        });
+        $('#AddAptTimePicker').datetimepicker({
+            format: 'LT',
+			minDate : d 
+        });
+        $('#AddAdmDatePicker').datetimepicker({
+            format: 'MM/DD/YYYY',
+			minDate : d
+        });
+        $('#AddAdmTimePicker').datetimepicker({
+            format: 'LT',
+			minDate : d
+        });
+    </script>
+
+</body>
+
+</html>

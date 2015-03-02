@@ -1,0 +1,505 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--Stylesheets Plugin-->
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+
+
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+   
+
+    <script>
+        function submitData() {
+            $.validate({
+                form: "#dischargeForm",
+                onSuccess: function () { }
+            });
+        }
+    </script>
+</head>
+<body class="innerBody">
+    <form onsubmit="return submitData()" method="post" id='dischargeForm'>
+        <div class="row"> 
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-user fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">Patient Name</span>
+                        <span class="LabelTextTile"><span name="PatientName" id="FormPatientName"></span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-birthday-cake fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">Age</span>
+                        <span class="LabelTextTile"><span name="" id=""></span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-venus-mars fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">Gender</span>
+                        <span class="LabelTextTile"><span name="" id=""></span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-mobile-phone fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">Mobile</span>
+                        <span class="LabelTextTile"><span name="" id=""></span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-key fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">IP Number</span>
+                        <span class="LabelTextTile"><span name="" id=""></span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="TileDisplay">
+                    <span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x text-primary"></i><i class="fa fa-clock-o fa-stack-1x fa-inverse"></i></span>
+                    <span class="TileGroupBox">
+                        <span class="TileLabel">Admission Time</span>
+                        <span class="LabelTextTile"><span name="" id=""></span></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+            
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-heading border-light">
+                            <h4 class="panel-title">Discharge Summary</h4>
+                        </div>
+                        <div class="panel-wrapper collapse in DischargeRow">
+                            <div class="row">
+
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Weight  </label>
+                                        <input type="text" id="ptweight" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Blood Group</label>
+                                        <input type="text" id="bloodgroup" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Operation Time </label>
+                                        <input type="text" id="OptTime" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">FIR Number </label>
+                                        <input type="text" id="FirNumber" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">MLC Number</label>
+                                        <input type="text" id="MlcNumber" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="LabelInputContainer">
+                                        <label class="FormLabel">Discharge Time <span class="mandotory_star">*</span></label>
+                                        <input type="text" id="DischargeTime" class="form-control" data-validation="required" data-validation-error-msg=" " />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="panel panel-white no-radius">
+                                <div class="panel-heading border-light">
+                                    <h4 class="panel-title">Consultant Information</h4>
+                                </div>
+                                <div class="panel-wrapper collapse in DischargeRow" style="height:389px;overflow:auto;">
+                                    <div class="row">
+                                        <div class="InfoContainer">
+                                            <div class="TableView Consultant">
+                                                <div class="TableViewHeader">
+                                                    <div class="row" >
+                                                        <div class="col-md-3 col-lg-3 IconColumns  CheckCol">
+                                                            <button class="noButtons" type="button"><i class="fa greenColor fa-plus-circle"></i></button>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            Consultant Name
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            Contact
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 LastCol">
+                                                            Speciality
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-lg-3 IconColumns CheckCol">
+
+                                                            <button class="noButtons" type="button"><i class="fa redColor fa-times-circle"></i></button>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 nomargin inputheight">
+                                                            <select id=""></select>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 nomargin inputheight">
+                                                            <input class="form-control" disabled="disabled" />
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3 LastCol nomargin inputheight">
+                                                            <input class="form-control" disabled="disabled" />
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="panel panel-white no-radius">
+                                <div class="panel-heading border-light">
+                                    <h4 class="panel-title">Report Information</h4>
+                                </div>
+                                <div class="panel-wrapper collapse in DischargeRow">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="row RowColumn">
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">Bp</label>
+                                                        <input type="text" id="bp" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">Temperature</label>
+                                                        <input type="text" id="Temperature" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">PR</label>
+                                                        <input type="text" id="ptPr" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">RR</label>
+                                                        <input type="text" id="ptRr" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">CVS</label>
+                                                        <input type="text" id="Ptcvs" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">Abdomen</label>
+                                                        <input type="text" id="Abdomen" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">CNS</label>
+                                                        <input type="text" id="PtCns" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">Gynaec/PR</label>
+                                                        <input type="text" id="PtGynaec" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4  col-lg-4">
+                                                    <div class="LabelInputContainer">
+                                                        <label class="FormLabel">RS</label>
+                                                        <input type="text" id="PtRs" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row CheckBoxList">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="LabelInputContainer">
+                                                <label class="FormLabel">Investigations Enclosed</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="BloodReport"> Blood Report
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="ECG"> ECG
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="XRay"> X-Ray
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="UltraSonic"> UltraSonic
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="UltraSonic"> Urine
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="UltraSonic"> Hemoglobin
+                                                    </label>
+                                                    <br />
+                                                    <br />
+                                                    <label>
+                                                        <input type="checkbox" id="USG"> USG
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="Echo"> Echo
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="CT SCAN / MRI "> CT SCAN / MRI
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="Stool"> Stool
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="WBC"> WBC
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" id="Miscellaneous"> Miscellaneous
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-white no-radius">
+                        <div class="panel-heading border-light">
+                            <h4 class="panel-title">Other Information</h4>
+                        </div>
+                        <div class="panel-wrapper collapse in DischargeRow">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Provisional Diagnosis at the time of Admission</label>
+                                            <textarea class="form-control PopOverMaxlength" id="PrvisionDiagnosis" rel="popover" maxlength="350" rows="2" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">ICD-10 Code(s)<span class="mandotory_star">*</span></label>
+                                            <textarea class="form-control PopOverMaxlength"  id="ICDCode" maxlength="350" rows="2" data-validation="required" data-validation-error-msg=" " rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Presenting Complaints with Duration and Reason for Admission </label>
+                                            <textarea class="form-control PopOverMaxlength" id="Complaints" maxlength="350" rows="2" rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Key findings, on physical examination at the time of admission</label>
+                                            <textarea class="form-control PopOverMaxlength" id="KeyFinding" maxlength="350" rows="2" rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Summary of Presenting Illness </label>
+                                            <textarea class="form-control PopOverMaxlength" id="SummaryPrestIllness" maxlength="350" rows="2" rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Significant Past Medical and Surgical History<span class="mandotory_star">*</span></label>
+                                            <textarea class="form-control PopOverMaxlength" id="PastMedical" maxlength="350" rows="2" data-validation="required" data-validation-error-msg=" " rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Summary of key investigations during Hospitalization<span class="mandotory_star">*</span> </label>
+                                            <textarea class="form-control PopOverMaxlength" id="KeyInvest" maxlength="350" rows="2" data-validation="required" data-validation-error-msg=" " rel="popover" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Course in the Hospital including complications<span class="mandotory_star">*</span></label>
+                                            <textarea class="form-control PopOverMaxlength" id="CourseHospital" maxlength="350" rows="2" data-validation="required" data-validation-error-msg=" " onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">History of alcoholism, tobacco or substance abuse</label>
+                                            <textarea class="form-control PopOverMaxlength" id="AlcoholHistory" maxlength="350" rows="2" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Family History if significant/relevant to diagnosis or treatment</label>
+                                            <textarea class="form-control PopOverMaxlength" id="FamilyHistory" maxlength="350" rows="2" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Final Diagnosis at the time of Discharge</label>
+                                            <textarea class="form-control PopOverMaxlength" id="FinalDiagnosis" maxlength="350" rows="2" onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Advice on Discharge<span class="mandotory_star">*</span></label>
+                                            <textarea class="form-control PopOverMaxlength" id="AdviceDicharge" maxlength="350" rows="2" data-validation="required" data-validation-error-msg=" " onkeyup="limitContactAreaLength(this);" data-toggle="popover" data-trigger="focus" data-placement="top"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">Next Review On<span class="mandotory_star">*</span></label>
+                                            <div class="input-group date " id="NextReviewDateDiv">
+                                                <input type="text" class="form-control" autocomplete="off" name="NextReviewDate" id="FormNextReviewDate" data-validation="required" data-validation-error-msg=" " >
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="LabelInputContainer">
+                                            <label class="FormLabel">To Consult With </label>
+                                            <input type="text" id="ToConsult" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div style="text-align:center">
+                        <input class="btn btn-success button_formsubmit" type='submit' value='Submit'>&nbsp;&nbsp;&nbsp;
+                        <input class="btn btn-default button_formreset" type='reset' value='Reset'>
+                        <input type='hidden' id='field24' name='itcsdata' />
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        <div style="display:none" id="PopoverText">(Maximum characters: 350)<br />(Character left: <span id="charLeft">350</span>)</div>
+        </form>
+        <script src="js/jquery.loadJSON.js"></script>
+        <script src="js/vendor/jquery.form-validator.min.js"></script>
+        <script src="js/commonScript.js"></script>
+        <script type="text/javascript">
+            function limitContactAreaLength(obj)//Deva/24-04-2013
+            {
+                var textAreaValue = obj.value;
+                var charLeft = 350 - textAreaValue.length;
+                if (charLeft < 0) {
+                    obj.value = textAreaValue.substring(0, 350);
+                    return;
+                }
+                document.getElementById('charLeft').innerText = charLeft;
+            }
+            var s;
+            $('.PopOverMaxlength').popover({
+                html: true,
+                content: function () {
+                    return $('#PopoverText').html();
+                }
+            });
+           
+
+            
+            $('#NextReviewDateDiv').datetimepicker({
+                format: 'MM/DD/YYYY',
+            });
+            
+        </script>
+    <style>
+        .fa-2x {
+            font-size: 22px;
+        }
+    </style>
+</body>
+</html>

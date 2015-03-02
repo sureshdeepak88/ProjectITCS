@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
+
+<html lang="en-US" class="  js flexbox flexboxlegacy canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <title>Ragavendra Hospital</title>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--Stylesheets Plugin-->
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--<link href="css/element.css" rel="stylesheet" />-->
+
+
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+
+
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/vendor/bootstrap-datetimepicker.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+      <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+
+
+    <script>
+        function changeType(flag, obj) {
+            if (obj.className != 'serviceboxadd') {
+                if (flag)
+                    obj.setAttribute('class', 'servicebox');
+                else
+                    obj.setAttribute('class', 'serviceboxselect');
+            }
+        }
+        function getDecVal(val) {
+            var value1 = document.getElementById('amtEach' + val).value;
+            var value2 = document.getElementById('amtEachPaise' + val).value;
+            var qty = document.getElementById('qty' + val).value;
+            var totAmt = parseFloat(value1 + '.' + value2) * parseInt(qty);
+            var toAmt = totAmt.toFixed(2);
+            var sum = 0.0;
+            document.getElementById('amt' + val).innerHTML = toAmt;
+            var table = document.getElementById('billTable');
+
+            for (i = 1 ; i < table.rows.length ; i++) {
+                var value1 = document.getElementById('amtEach' + i).value;
+                var value2 = document.getElementById('amtEachPaise' + i).value;
+                var qty = document.getElementById('qty' + i).value;
+                var totAmt = parseFloat(value1 + '.' + value2) * parseInt(qty);
+                sum = sum + totAmt;
+            }
+            document.getElementById('earnings').value = sum.toFixed(2);
+        }
+        function selectService(obj) {
+
+
+            if (obj.className == 'serviceboxadd')
+
+                return;
+
+            obj.setAttribute('class', 'serviceboxadd');
+            var table = document.getElementById('billTable');
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var amtBox1 = '<input id="amtEach' + rowCount + '" onkeypress="return isNumber(event)" type="text" value="0" maxlength="6" onblur="getDecVal(' + rowCount + ')" /><input id="amtEachPaise' + rowCount + '" onkeypress="return isNumber(event)" type="text" maxlength="2"  onblur="getDecVal(' + rowCount + ')" value="00" />';
+            var qty = '<input id="qty' + rowCount + '" onkeypress="return isNumber(event)" type="text" maxlength="3"  value="0" onblur="getDecVal(' + rowCount + ')" />';
+            newRow = '<td class="check"></td><td id="part' + rowCount + '" class="particulars">' + obj.innerText + '</td><td class="Amount">' + amtBox1 + '</td><td class="qty">' + qty + '</td><td class="RowTotal" id="amt' + rowCount + '"></td>';
+            row.innerHTML = newRow;
+
+        }
+        function fillDetails() {
+            var id = window.location.href;
+            try {
+                id = unescape(id.substring(id.lastIndexOf('?') + 9));
+                jsonval = JSON.parse(id);
+                document.getElementById('nbr').value = jsonval.patientNbr;
+                document.getElementById('name').value = jsonval.name;
+                document.getElementById('apptNbr').value = jsonval.apptNbr;
+            }
+            catch (e) { }
+        }
+
+        function validateAndGenerate() {
+            var jsondata = {};
+            jsondata.nbr = '1011';
+            jsondata.name = document.getElementById('name').value;
+            jsondata.type = 'IN';
+            jsondata.patientNbr = document.getElementById('nbr').value;
+            jsondata.billDetail = [];
+            var table = document.getElementById('billTable');
+            for (i = 1 ; i < table.rows.length ; i++) {
+                var value1 = document.getElementById('amtEach' + i).value;
+                var qty = document.getElementById('qty' + i).value;
+                if (!parseInt(value1)) {
+                    alert('Please provide cost for all the services');
+                    document.getElementById('amtEach' + i).focus();
+                    return false;
+                }
+                if (!parseInt(qty)) {
+                    alert('Please provide quantity for all the services');
+                    document.getElementById('qty' + i).focus();
+                    return false;
+                }
+                var value1 = document.getElementById('amtEach' + i).value;
+                var value2 = document.getElementById('amtEachPaise' + i).value;
+                var qty = document.getElementById('qty' + i).value;
+                var totAmt = parseFloat(value1 + '.' + value2) * parseInt(qty);
+                var toAmt = totAmt.toFixed(2);
+                var objNew = {};
+                objNew.particulars = document.getElementById('part' + i).innerText;
+                objNew.amt = '' + parseFloat(value1 + '.' + value2);
+                objNew.qty = document.getElementById('qty' + i).value;
+                objNew.tot = '' + toAmt;
+                jsondata.billDetail.push(objNew);
+            }
+            jsondata.earnings = document.getElementById('earnings').value;
+            document.getElementById('itcsdata').value = JSON.stringify(jsondata);
+            return true;
+        }
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body class="innerBody" onload='fillDetails()'>
+    <form action="3011.html" method="post" target="_blank" onsubmit="return validateAndGenerate()">
+
+        <div id="patientDet" class="Generatebill">
+            <div class="PatientRow">
+                <div class="infoRow">
+                    <i class="fa fa-user"></i>
+                    <span class="infoLabel">Patient Name</span>
+                    <span class="infoText" id="patientNamVal">
+                        <input id='nbr' class="HideTextbox" type="text" maxlength="25" disabled />
+                    </span>
+                </div>
+            </div>
+            <div class="PatientRow">
+                <div class="infoRow  ">
+                    <i class="fa fa-key"></i>
+                    <span class="infoLabel">Patient Number</span>
+                    <span class="infoText" id="patientNumVal">
+                        <input id='nbr' class="HideTextbox" type="text" maxlength="25" disabled />
+                    </span>
+                </div>
+            </div>
+            <div class="PatientRow">
+                <div class="infoRow  ">
+                    <i class="fa fa-bar-chart"></i>
+                    <span class="infoLabel">Appointment Number</span>
+                    <span class="infoText" id="billNumVal">
+                        <input id='apptNbr' class="HideTextbox" type="text" maxlength="25" disabled />
+                    </span>
+                    <!--<input class="btn btn-success " type='button' value='Edit'>-->
+                </div>
+            </div>
+            <div class="PatientRow">
+                <div class="infoRow  ">
+                    <i class="fa fa-calendar-o"></i>
+                    <span class="infoLabel">Appointment Date</span>
+                    <span class="infoText" id="billNumVal">
+                        <input id='apptDate' class="HideTextbox" type="text" maxlength="25" disabled />
+                    </span>
+                    <!--<input class="btn btn-success " type='button' value='Edit'>-->
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+                <div class="panel panel-white no-radius">
+                    <div class="panel-heading border-light">
+                        <h4 class="panel-title">Services </h4>
+                    </div>
+
+                    <div class="panel-wrapper collapse in ">
+                        <div class="panel-body">
+                            <ul class="selectServiceList">
+                                <li id="service1" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Room Rent
+                                </li>
+                                <li id="service2" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Dr. Visiting Charges
+                                </li>
+                                <li id="service3" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Nursing Charges
+                                </li>
+                                <li id="service4" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Duty Dr. Charges
+                                </li>
+                                <li id="service5" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Service Charges
+
+                                </li>
+                                <li id="service6" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Special Consultant Fee
+
+                                </li>
+                                <li id="service7" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Theatre charges
+
+                                </li>
+                                <li id="service8" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Surgeon Fees
+
+                                </li>
+                                <li id="service9" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Lab fees
+
+                                </li>
+                                <li id="service9" class="servicebox" onmouseover="changeType(0,this)" onmouseout="changeType(1,this)" onclick="selectService(this)">
+                                    Misc. Charges
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="billDet">
+            <table id='billTable' class="Header_Table">
+                <tr><th class="check"></th>
+                    <th class="column1" >Particulars</th>
+                    <th class="column2" style="text-align:center">Charges</th>
+                    <th class="column3" style="text-align:center">Qty</th>
+                    <th class="column4">Total Amount</th>
+                </tr>
+
+            </table>
+            <table id='billTable' class="Row_Table">
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="" style="float:right; text-align:right"> </td>
+                    <td class="column4 bill_button">
+                        <button class="noButtons" type="submit"><span class="fa-stack fa-2x"><i class="fa fa-square fa-stack-2x "></i><i class="fa fa-credit-card fa-stack-1x fa-inverse" data-toggle="tooltip" data-placement="top" title="Generate&nbsp;Bill"></i></span></button> Total Bill Amount&nbsp;<input id='earnings' type='text' id="totalAmtBox" value="0" disabled />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="column2 " >
+                        
+                    </td>
+                </tr>
+            </table>
+
+            <input type='hidden' id='itcsdata' name='itcsdata' />
+
+        </div>
+
+
+    </form>
+    <script src="js/commonScript.js"></script>
+</body>
+</html>

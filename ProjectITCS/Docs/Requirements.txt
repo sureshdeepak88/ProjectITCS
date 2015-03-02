@@ -1,0 +1,5 @@
+
+1. Node js
+2. Couch DB
+3. npm install winreg
+4. npm install node-couchdb
